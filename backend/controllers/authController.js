@@ -97,12 +97,14 @@ exports.forgotPassword = async (req, res) => {
 
     // 👉 Gửi email
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.MAIL_USER,     // từ .env
-        pass: process.env.MAIL_PASS
-      }
-    });
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: process.env.MAIL_USER,
+    pass: process.env.MAIL_PASS
+  }
+});
 
     const mailOptions = {
       from: `"Mochi Store" <${process.env.MAIL_USER}>`,
