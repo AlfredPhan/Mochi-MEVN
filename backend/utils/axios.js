@@ -1,4 +1,4 @@
-// src/utils/axios.js
+// backend/src/utils/axios.js
 import axios from 'axios'
 
 const instance = axios.create({

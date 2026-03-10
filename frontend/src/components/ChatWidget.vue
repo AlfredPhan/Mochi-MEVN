@@ -162,7 +162,7 @@ export default {
             this.$nextTick(() => this.scrollToBottom());
 
             try {
-                const res = await axios.post(`/api/chatbot/ai`, { message: userText }, { withCredentials: true });
+                const res = await axios.post(`/chatbot/ai`, { message: userText }, { withCredentials: true });
 
                 this.isTyping = false;
 
