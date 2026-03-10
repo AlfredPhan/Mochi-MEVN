@@ -56,7 +56,11 @@ app.use(express.json());
 app.use(session({
   secret: 'your-session-secret',
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: false,
+  cookie: {
+    secure: true,
+    sameSite: 'none'
+  }
 }));
 
 app.use(passport.initialize());

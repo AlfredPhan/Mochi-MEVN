@@ -67,11 +67,11 @@ router.get('/google/callback',
     );
 
     res.cookie('token', token, {
-      httpOnly: true,
-      secure: false,
-      sameSite: 'Lax',
-      maxAge: 7 * 24 * 60 * 60 * 1000
-    });
+  httpOnly: true,
+  secure: true,
+  sameSite: 'None',
+  maxAge: 7 * 24 * 60 * 60 * 1000
+});
 
     // ✅ Gửi tới TẤT CẢ origins được phép
     const allowedOrigins = process.env.CLIENT_URLS.split(',');
@@ -113,10 +113,10 @@ router.get('/google/callback',
 
 router.get('/logout', (req, res) => {
   res.clearCookie('token', {
-    httpOnly: true,
-    secure: false, // true nếu deploy HTTPS
-    sameSite: 'Lax'
-  });
+  httpOnly: true,
+  secure: true,
+  sameSite: 'None'
+});
   
   res.json({ message: 'Logged out' });
 });
