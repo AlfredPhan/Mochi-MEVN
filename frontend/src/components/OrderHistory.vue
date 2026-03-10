@@ -428,7 +428,7 @@ const confirmCancel = async () => {
 
 const fetchOrders = async () => {
   try {
-    const res = await fetch('http://localhost:5000/api/orders/my-orders', {
+    const res = await fetch('https://mochi-mevn.onrender.com/api/orders/my-orders', {
       credentials: 'include'
     })
 
@@ -477,7 +477,7 @@ const cancelOrder = async (orderId) => {
     order.cancelling = true
 
     const res = await fetch(
-      `http://localhost:5000/api/orders/${orderId}/cancel`,
+      `https://mochi-mevn.onrender.com/api/orders/${orderId}/cancel`,
       {
         method: 'PATCH',
         credentials: 'include'

@@ -224,7 +224,7 @@ const userToDelete = ref(null)
 // Fetch users
 const fetchUsers = async () => {
   try {
-    const res = await fetch('http://localhost:5000/api/admin/users', {
+    const res = await fetch('https://mochi-mevn.onrender.com/api/admin/users', {
       credentials: 'include'
     })
     const data = await res.json()
@@ -246,7 +246,7 @@ const updateRole = async (user) => {
   }
 
   try {
-    const res = await fetch(`http://localhost:5000/api/admin/users/${user._id}/role`, {
+    const res = await fetch(`https://mochi-mevn.onrender.com/api/admin/users/${user._id}/role`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
@@ -280,7 +280,7 @@ const deleteUser = (id) => {
 // Confirm delete
 const confirmDelete = async () => {
   try {
-    const res = await fetch(`http://localhost:5000/api/admin/users/${userToDelete.value._id}`, {
+    const res = await fetch(`https://mochi-mevn.onrender.com/api/admin/users/${userToDelete.value._id}`, {
       method: 'DELETE',
       credentials: 'include'
     })

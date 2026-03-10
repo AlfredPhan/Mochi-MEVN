@@ -237,7 +237,7 @@ const showToast = inject("showToast");
 // Fetch orders
 const fetchOrders = async () => {
   try {
-    const res = await fetch("http://localhost:5000/api/admin/orders", {
+    const res = await fetch("https://mochi-mevn.onrender.com/api/admin/orders", {
       credentials: "include",
     });
     const data = await res.json();
@@ -254,7 +254,7 @@ const fetchOrders = async () => {
 const updateStatus = async (order) => {
   try {
     const res = await fetch(
-      `http://localhost:5000/api/admin/orders/${order._id}/status`,
+      `https://mochi-mevn.onrender.com/api/admin/orders/${order._id}/status`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },

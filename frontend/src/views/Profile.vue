@@ -256,7 +256,7 @@ const updateProfile = async () => {
 
       if (emailChanged) {
         tasks.push(
-          fetch('http://localhost:5000/api/users/email/change/request', {
+          fetch('https://mochi-mevn.onrender.com/api/users/email/change/request', {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
@@ -267,7 +267,7 @@ const updateProfile = async () => {
 
       if (phoneChanged) {
         tasks.push(
-          fetch('http://localhost:5000/api/users/phone/change/request', {
+          fetch('https://mochi-mevn.onrender.com/api/users/phone/change/request', {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
@@ -323,7 +323,7 @@ async function saveOtherFields() {
     const fileInput = document.getElementById('avatar-input')
     if (fileInput?.files?.[0]) formData.append('avatar', fileInput.files[0])
 
-    const res = await fetch('http://localhost:5000/api/users/profile', {
+    const res = await fetch('https://mochi-mevn.onrender.com/api/users/profile', {
       method: 'PUT',
       credentials: 'include',
       body: formData
@@ -353,7 +353,7 @@ async function verifyPhoneOtp() {
 
   try {
     otpVerifying.value = true
-    const res = await fetch('http://localhost:5000/api/users/phone/change/verify', {
+    const res = await fetch('https://mochi-mevn.onrender.com/api/users/phone/change/verify', {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
@@ -387,7 +387,7 @@ async function resendOtp() {
   if (otpSeconds.value > 0 || !pendingPhone.value) return
   try {
     otpSending.value = true
-    const res = await fetch('http://localhost:5000/api/users/phone/change/request', {
+    const res = await fetch('https://mochi-mevn.onrender.com/api/users/phone/change/request', {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
@@ -409,7 +409,7 @@ async function resendEmailOtp() {
   if (otpSeconds.value > 0 || !pendingEmail.value) return
   try {
     otpSending.value = true
-    const res = await fetch('http://localhost:5000/api/users/email/change/request', {
+    const res = await fetch('https://mochi-mevn.onrender.com/api/users/email/change/request', {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
@@ -435,7 +435,7 @@ async function verifyEmailOtp() {
   }
   try {
     otpVerifying.value = true
-    const res = await fetch('http://localhost:5000/api/users/email/change/verify', {
+    const res = await fetch('https://mochi-mevn.onrender.com/api/users/email/change/verify', {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },

@@ -249,7 +249,7 @@ const averageRating = computed(() => {
 })
 
 const fetchReviews = async () => {
-    const res = await fetch(`http://localhost:5000/api/reviews/${route.params.id}`)
+    const res = await fetch(`https://mochi-mevn.onrender.com/api/reviews/${route.params.id}`)
     const data = await res.json()
     // console.log('✅ Reviews:', data);
     reviews.value = data
@@ -283,7 +283,7 @@ const submitReview = async () => {
     isSubmitting.value = true;
 
     try {
-        const res = await fetch('http://localhost:5000/api/reviews', {
+        const res = await fetch('https://mochi-mevn.onrender.com/api/reviews', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -316,7 +316,7 @@ const submitReview = async () => {
 
 
 const fetchProduct = async () => {
-    const res = await fetch(`http://localhost:5000/api/products/${route.params.id}`)
+    const res = await fetch(`https://mochi-mevn.onrender.com/api/products/${route.params.id}`)
     const data = await res.json()
     product.value = data
 }

@@ -165,7 +165,7 @@ const expandedChats = ref(new Set())
 
 const fetchChats = async () => {
   try {
-    const res = await fetch('http://localhost:5000/api/admin/chats', {
+    const res = await fetch('https://mochi-mevn.onrender.com/api/admin/chats', {
       credentials: 'include'
     })
     const data = await res.json()

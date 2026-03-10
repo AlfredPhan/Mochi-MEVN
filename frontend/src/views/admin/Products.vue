@@ -243,7 +243,7 @@ const editingProduct = ref(null)
 // Load products
 const fetchProducts = async () => {
   try {
-    const res = await fetch('http://localhost:5000/api/admin/products', { credentials: 'include' })
+    const res = await fetch('https://mochi-mevn.onrender.com/api/admin/products', { credentials: 'include' })
     const data = await res.json()
     products.value = data
   } catch (err) {
@@ -258,8 +258,8 @@ const fetchProducts = async () => {
 const saveProduct = async () => {
   try {
     const url = editingProduct.value
-      ? `http://localhost:5000/api/admin/products/${editingProduct.value._id}`
-      : 'http://localhost:5000/api/admin/products'
+      ? `https://mochi-mevn.onrender.com/api/admin/products/${editingProduct.value._id}`
+      : 'https://mochi-mevn.onrender.com/api/admin/products'
     const method = editingProduct.value ? 'PUT' : 'POST'
 
     const res = await fetch(url, {
@@ -318,7 +318,7 @@ const deleteProduct = (id) => {
 // Xác nhận xoá
 const confirmDelete = async () => {
   try {
-    const res = await fetch(`http://localhost:5000/api/admin/products/${productToDelete.value._id}`, {
+    const res = await fetch(`https://mochi-mevn.onrender.com/api/admin/products/${productToDelete.value._id}`, {
       method: 'DELETE',
       credentials: 'include'
     })

@@ -288,7 +288,7 @@ const reviewToDelete = ref(null)
 // Fetch reviews
 const fetchReviews = async () => {
   try {
-    const res = await fetch('http://localhost:5000/api/admin/reviews', {
+    const res = await fetch('https://mochi-mevn.onrender.com/api/admin/reviews', {
       credentials: 'include'
     })
     const data = await res.json()
@@ -310,7 +310,7 @@ const deleteReview = (id) => {
 // Confirm delete
 const confirmDelete = async () => {
   try {
-    const res = await fetch(`http://localhost:5000/api/admin/reviews/${reviewToDelete.value._id}`, {
+    const res = await fetch(`https://mochi-mevn.onrender.com/api/admin/reviews/${reviewToDelete.value._id}`, {
       method: 'DELETE',
       credentials: 'include'
     })

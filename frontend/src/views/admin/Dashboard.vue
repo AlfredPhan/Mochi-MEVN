@@ -11,10 +11,10 @@ const selectedPeriod = ref('7d')
 onMounted(async () => {
   try {
     const [statsRes, ordersRes, productsRes, reviewsRes] = await Promise.all([
-      fetch('http://localhost:5000/api/admin/stats', { credentials: 'include' }),
-      fetch('http://localhost:5000/api/admin/orders', { credentials: 'include' }),
-      fetch('http://localhost:5000/api/admin/products', { credentials: 'include' }),
-      fetch('http://localhost:5000/api/admin/reviews', { credentials: 'include' }),
+      fetch('https://mochi-mevn.onrender.com/api/admin/stats', { credentials: 'include' }),
+      fetch('https://mochi-mevn.onrender.com/api/admin/orders', { credentials: 'include' }),
+      fetch('https://mochi-mevn.onrender.com/api/admin/products', { credentials: 'include' }),
+      fetch('https://mochi-mevn.onrender.com/api/admin/reviews', { credentials: 'include' }),
     ])
     stats.value = await statsRes.json()
     orders.value = await ordersRes.json()

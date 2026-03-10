@@ -222,7 +222,7 @@ const toastIcon = computed(() => {
 const sendOtp = async () => {
     if (!form.value.email) { showToast('Please enter your email before sending OTP', 'error'); return; }
     try {
-        const res = await fetch('http://localhost:5000/api/verify-email', {
+        const res = await fetch('https://mochi-mevn.onrender.com/api/verify-email', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: form.value.email })
@@ -235,7 +235,7 @@ const sendOtp = async () => {
 
 const verifyOtp = async () => {
     try {
-        const res = await fetch('http://localhost:5000/api/verify-email/confirm-otp', {
+        const res = await fetch('https://mochi-mevn.onrender.com/api/verify-email/confirm-otp', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: form.value.email, otp: form.value.otp })
@@ -253,7 +253,7 @@ const handlePlaceOrder = async () => {
     placingOrder.value = true
     try {
         if (form.value.paymentMethod === 'Stripe') {
-            const res = await fetch('http://localhost:5000/api/payment/create-stripe-session', {
+            const res = await fetch('https://mochi-mevn.onrender.com/api/payment/create-stripe-session', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -283,7 +283,7 @@ const handlePlaceOrder = async () => {
             }
         } else {
             // COD
-            const res = await fetch('http://localhost:5000/api/payment/create-order', {
+            const res = await fetch('https://mochi-mevn.onrender.com/api/payment/create-order', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
