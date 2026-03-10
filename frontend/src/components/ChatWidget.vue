@@ -122,7 +122,7 @@
 <script>
 import { marked } from 'marked'
 import DOMPurify from 'dompurify'
-import axios from 'axios';
+import axios from '@/utils/axios';
 
 export default {
     emits: ['chat-open', 'chat-close', 'cart-updated'],
