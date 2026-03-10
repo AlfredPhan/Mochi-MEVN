@@ -30,15 +30,22 @@ app.use(
 
 
 
-const allowedOrigins = process.env.CLIENT_URLS.split(',');
+const allowedOrigins = process.env.CLIENT_URLS
+  ? process.env.CLIENT_URLS.split(',')
+  : [];
 
 app.use(cors({
   origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
+
+    // cho phép Postman / mobile app
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS'));
+      callback(new Error("Not allowed by CORS"));
     }
+
   },
   credentials: true
 }));
