@@ -1,0 +1,81 @@
+/* ==== Reset CSS cơ bản ==== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* ==== Font và body chung ==== */
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fffdfd;
+    color: #333;
+    line-height: 1.6;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* ==== Liên kết ==== */
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  /* ==== Hình ảnh ==== */
+  img {
+    max-width: 100%;
+    display: block;
+  }
+  
+  /* ==== Tiêu đề ==== */
+  h1, h2, h3 {
+    font-weight: bold;
+    margin-bottom: 0.5em;
+  }
+  
+  /* ==== Container chung (nếu dùng) ==== */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+  
+
+  #toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  
+  
+  .custom-toast {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 14px;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    pointer-events: none;
+  }
+  
+  .custom-toast.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+
+  
