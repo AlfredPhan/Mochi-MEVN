@@ -166,7 +166,7 @@ export default {
 
                 this.isTyping = false;
 
-                // Thêm message với flag cartUpdated
+                // Thêm message với flag cartUpdatedd
                 this.messages.push({
                     text: res.data.reply,
                     sender: 'bot',
