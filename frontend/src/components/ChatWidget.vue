@@ -121,7 +121,8 @@
 <script>
 import { marked } from 'marked'
 import DOMPurify from 'dompurify'
-import axios from 'axios';
+import axios from 'axios'
+import { API_URL } from '../config/api'
 
 export default {
     emits: ['chat-open', 'chat-close', 'cart-updated'],
@@ -161,19 +162,30 @@ export default {
             this.$nextTick(() => this.scrollToBottom());
 
             try {
-                const res = await axios.post(`/api/chatbot/ai`, { message: userText }, { withCredentials: true });
+                const res = await axios.post(
+  `${API_URL}/chatbot/ai`,
+  { message: userText },
+  { withCredentials: true }
+)
 
                 this.isTyping = false;
 
                 // Thêm message với flag cartUpdated
-                this.messages.push({
-                    text: res.data.reply,
-                    sender: 'bot',
-                    time: this.getCurrentTime(),
-                    cartUpdated: res.data.cartUpdated || false,
-                    redirect: res.data.redirect || null,
-                    redirectLabel: res.data.redirectLabel || null
-                });
+                const botReply =
+  res.data?.reply ||
+  res.data?.message ||
+  res.data?.answer ||
+  res.data?.response ||
+  'Sorry, I did not receive a valid response from the chatbot.'
+
+this.messages.push({
+  text: botReply,
+  sender: 'bot',
+  time: this.getCurrentTime(),
+  cartUpdated: res.data?.cartUpdated || false,
+  redirect: res.data?.redirect || null,
+  redirectLabel: res.data?.redirectLabel || null
+})
 
                 // Emit event để parent component (App.vue/Navbar) cập nhật cart count
                 if (res.data.cartUpdated) {
@@ -217,8 +229,8 @@ export default {
         },
 
         renderMarkdown(text) {
-            return DOMPurify.sanitize(marked(text));
-        },
+  return DOMPurify.sanitize(marked.parse(String(text ?? '')))
+},
 
         goToPage(path) {
             this.$router.push(path);
