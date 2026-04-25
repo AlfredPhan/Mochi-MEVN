@@ -16,7 +16,7 @@ onMounted(() => {
 
   // Load model GLB
   const loader = new GLTFLoader()
-  loader.load('/models/mochi_dessert_3d_scan.glb', (gltf) => {
+  loader.load('/models/sketchfab_store_in_mall.glb', (gltf) => {
     scene.add(gltf.scene)
     camera.position.set(0, 1.5, 3)
 

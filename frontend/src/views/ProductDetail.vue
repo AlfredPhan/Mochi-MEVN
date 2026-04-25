@@ -35,7 +35,7 @@
                         </div>
                     </div>
                     <model-viewer
-                        src="/models/mochi_dessert_3d_scan.glb"
+                        src="/models/sketchfab_store_in_mall.glb"
                         alt="3D Mochi Dessert"
                         camera-controls
                         auto-rotate
