@@ -57,9 +57,9 @@
 
         <div class="hero-product-card liquid-glass">
           <img
-            src="https://domesticallyblissful.com/wp-content/uploads/2024/07/how-to-make-Mochi-Waffle-Cake-683x1024.png"
-            alt="Fresh mochi cake"
-          />
+  src="/images/mochi-waffle-cake.png"
+  alt="Fresh mochi cake"
+/>
 
           <div class="hero-card-overlay liquid-glass">
             <span>Today’s pick</span>
