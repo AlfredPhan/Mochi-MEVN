@@ -1,4 +1,5 @@
 // stores/cart.js
+import { API_URL } from '../config/api'
 import { ref, computed } from 'vue'
 
 const cart = ref([])
@@ -8,7 +9,7 @@ const cartCount = computed(() => cart.value.reduce((sum, i) => sum + i.quantity,
 // ─── Sync từ DB ───────────────────────────────────────────────────────────────
 const syncCartFromDB = async () => {
   try {
-    const res = await fetch('/api/cart', { credentials: 'include' })
+    const res = await fetch(`${API_URL}/cart`, { credentials: 'include' })
     if (!res.ok) return
     const data = await res.json()
     // ✅ _id luôn là productId string — dùng thống nhất ở mọi nơi
@@ -41,7 +42,7 @@ const addToCart = async (product, quantity = 1) => {
     })
   }
   try {
-    await fetch('/api/cart/add', {
+    await fetch(`${API_URL}/cart/add`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
@@ -59,7 +60,7 @@ const addToCart = async (product, quantity = 1) => {
 const removeFromCart = async (itemId) => {
   cart.value = cart.value.filter(i => i._id?.toString() !== itemId?.toString())
   try {
-    await fetch(`/api/cart/remove/${itemId}`, {
+    await fetch(`${API_URL}/cart/remove/${itemId}`, {
       method: 'DELETE',
       credentials: 'include'
     })
@@ -82,7 +83,7 @@ const updateQuantity = async (itemId, newQty) => {
   item.quantity = newQty
 
   try {
-    const res = await fetch('/api/cart/update', {
+    const res = await fetch(`${API_URL}/cart/update`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
@@ -102,7 +103,10 @@ const updateQuantity = async (itemId, newQty) => {
 const clearCart = async () => {
   cart.value = []
   try {
-    await fetch('/api/cart/clear', { method: 'DELETE', credentials: 'include' })
+    await fetch(`${API_URL}/cart/clear`, {
+  method: 'DELETE',
+  credentials: 'include'
+})
   } catch (err) {
     console.error('clearCart API error:', err)
   }

@@ -43,7 +43,7 @@ const route = useRoute()
 
 const handleLogin = async () => {
     try {
-        const res = await fetch('http://localhost:5000/api/auth/login', {
+        const res = await fetch('http://https://mochi-mevn.onrender.com/api/auth/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
@@ -104,7 +104,7 @@ const loginWithGoogle = () => {
     const top = screenTop + (screenHeight - popupHeight) / 2;
 
     const googleWindow = window.open(
-        'http://localhost:5000/api/auth/google',
+        'http://https://mochi-mevn.onrender.com/api/auth/google',
         'GoogleLogin',
         `width=${popupWidth},height=${popupHeight},top=${top},left=${left}`
     );
@@ -113,7 +113,7 @@ const loginWithGoogle = () => {
         console.log('📩 Message received:', event.origin, event.data);
 
         const allowedOrigins = [
-            'http://localhost:5000',
+            'http://https://mochi-mevn.onrender.com',
             'http://192.168.1.11:5000'
         ];
         
@@ -131,7 +131,7 @@ const loginWithGoogle = () => {
                 // ✅ FIX 1: Đợi một chút để backend set cookie
                 await new Promise(resolve => setTimeout(resolve, 500));
 
-                const res = await fetch('http://localhost:5000/api/auth/me', {
+                const res = await fetch('http://https://mochi-mevn.onrender.com/api/auth/me', {
                     credentials: 'include'
                 });
 
