@@ -1,84 +1,75 @@
+<!-- src/components/Banner.vue -->
 <template>
-  <section class="banner">
-    <div class="banner-background">
-      <div class="floating-mochi mochi-1">🍡</div>
-      <div class="floating-mochi mochi-2">🍥</div>
-      <div class="floating-mochi mochi-3">🌸</div>
-      <div class="floating-mochi mochi-4">✨</div>
+  <section class="motion-hero">
+    <video autoplay muted loop playsinline class="hero-video">
+      <source src="/videos/mochi-hero.mp4" type="video/mp4" />
+    </video>
+
+    <div class="hero-video-fallback"></div>
+    <div class="hero-shade"></div>
+
+    <div class="hero-orbs" aria-hidden="true">
+      <span class="orb orb-one"></span>
+      <span class="orb orb-two"></span>
+      <span class="orb orb-three"></span>
     </div>
 
-    <div class="container">
-      <div class="banner-content">
-        <div class="banner-text">
-          <h2 class="banner-title">
-            <span class="title-line">Fresh & Delicious</span>
-            <span class="title-highlight">Mochi Every Day</span>
-          </h2>
-          <p class="banner-subtitle">
-            Discover the authentic taste of Japan with our handcrafted mochi collection.
-            Made fresh daily with premium ingredients and traditional techniques.
-          </p>
+    <div class="motion-hero-inner">
+      <div class="hero-copy liquid-glass">
+        <p class="motion-kicker">Fresh daily · Japanese-inspired treats</p>
 
-          <div class="banner-features">
-            <div class="feature">
-              <span class="feature-icon">🌟</span>
-              <span>Premium Quality</span>
-            </div>
-            <div class="feature">
-              <span class="feature-icon">🚚</span>
-              <span>Fresh Daily</span>
-            </div>
-            <div class="feature">
-              <span class="feature-icon">🇯🇵</span>
-              <span>Authentic Japanese</span>
-            </div>
-          </div>
+        <div class="hero-title-wrap">
+          <h1>
+            Mochi that
+            <br />
+            melts into
+            <br />
+            the moment
+          </h1>
 
-          <div class="banner-actions">
-            <button class="cta-primary" @click="shopNow">
-              <span>Shop Now</span>
-              <svg class="arrow-icon" viewBox="0 0 24 24" fill="none">
-                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                  stroke-linejoin="round" />
-              </svg>
-            </button>
-            <router-link to="/about" class="cta-secondary nav-link" active-class="active" @click="resetAuthState">
-              Learn More
-            </router-link>
-
-          </div>
+          <span class="motion-script hero-script">
+            fresh collection
+          </span>
         </div>
 
-        <div class="banner-image">
-          <div class="image-container">
-            <img src="https://domesticallyblissful.com/wp-content/uploads/2024/07/how-to-make-Mochi-Waffle-Cake-683x1024.png"
-              alt="Delicious Mochi Collection" class="hero-image" />
-            <div class="image-overlay"></div>
-            <!-- <div class="price-badge">
-              <span class="badge-text">Starting from</span>
-              <span class="badge-price">5₫</span>
-            </div> -->
-          </div>
+        <p class="hero-subtitle">
+          Handcrafted mochi, delicate fillings and soft seasonal flavors made
+          in small batches every day.
+        </p>
+
+        <div class="hero-actions">
+          <button class="motion-btn primary" @click="shopNow">
+            Shop menu
+            <span>→</span>
+          </button>
+
+          <router-link to="/about" class="motion-btn secondary">
+            About the store
+          </router-link>
         </div>
       </div>
 
-      <!-- Stats Section -->
-      <div class="stats-section">
-        <div class="stat-item">
-          <div class="stat-number">1000+</div>
-          <div class="stat-label">Happy Customers</div>
+      <div class="hero-showcase">
+        <div class="hero-note note-one liquid-glass">
+          <span>01</span>
+          <strong>Handmade daily</strong>
         </div>
-        <div class="stat-item">
-          <div class="stat-number">50+</div>
-          <div class="stat-label">Flavors Available</div>
+
+        <div class="hero-product-card liquid-glass">
+          <img
+            src="https://domesticallyblissful.com/wp-content/uploads/2024/07/how-to-make-Mochi-Waffle-Cake-683x1024.png"
+            alt="Fresh mochi cake"
+          />
+
+          <div class="hero-card-overlay liquid-glass">
+            <span>Today’s pick</span>
+            <strong>Fresh Cream Mochi</strong>
+          </div>
         </div>
-        <div class="stat-item">
-          <div class="stat-number">5★</div>
-          <div class="stat-label">Average Rating</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">24/7</div>
-          <div class="stat-label">Fresh Production</div>
+
+        <div class="hero-note note-two liquid-glass">
+          <span>02</span>
+          <strong>2–4h delivery</strong>
         </div>
       </div>
     </div>
@@ -87,380 +78,380 @@
 
 <script setup>
 const shopNow = () => {
-  console.log('Navigate to shop')
-  // Scroll to products section
   document.querySelector('.product-section')?.scrollIntoView({
-    behavior: 'smooth'
+    behavior: 'smooth',
+    block: 'start'
   })
-}
-
-const learnMore = () => {
-  console.log('Learn more about mochi')
 }
 </script>
 
 <style scoped>
-.banner {
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+.motion-hero {
   position: relative;
+  isolation: isolate;
+  min-height: calc(100vh - 82px);
   overflow: hidden;
-  padding: 80px 0 60px;
-  min-height: 70vh;
-  display: flex;
-  align-items: center;
+  border-bottom-left-radius: 32px;
+  border-bottom-right-radius: 32px;
+  background: #211d18;
+  color: #fffaf2;
 }
 
-.banner-background {
+.hero-video,
+.hero-video-fallback,
+.hero-shade {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
+  inset: 0;
 }
 
-.floating-mochi {
-  position: absolute;
-  font-size: 40px;
-  opacity: 0.1;
-  animation: float 6s ease-in-out infinite;
-}
-
-.mochi-1 {
-  top: 20%;
-  left: 10%;
-  animation-delay: 0s;
-}
-
-.mochi-2 {
-  top: 60%;
-  right: 15%;
-  animation-delay: 2s;
-}
-
-.mochi-3 {
-  bottom: 30%;
-  left: 20%;
-  animation-delay: 4s;
-}
-
-.mochi-4 {
-  top: 40%;
-  right: 30%;
-  animation-delay: 1s;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  position: relative;
-  z-index: 2;
-}
-
-.banner-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
-  margin-bottom: 60px;
-}
-
-.banner-text {
-  padding-right: 20px;
-}
-
-.banner-title {
-  font-size: clamp(36px, 6vw, 56px);
-  font-weight: 800;
-  line-height: 1.1;
-  margin-bottom: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.title-line {
-  background: linear-gradient(135deg, #374151 0%, #6b7280 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.title-highlight {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  position: relative;
-  height: 70px;
-}
-
-.title-highlight::after {
-  content: '';
-  position: absolute;
-  bottom: -8px;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 2px;
-}
-
-.banner-subtitle {
-  font-size: 18px;
-  color: #6b7280;
-  line-height: 1.6;
-  margin-bottom: 32px;
-  max-width: 500px;
-}
-
-.banner-features {
-  display: flex;
-  gap: 24px;
-  margin-bottom: 40px;
-  flex-wrap: wrap;
-}
-
-.feature {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #374151;
-  padding: 8px 16px;
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 20px;
-  backdrop-filter: blur(10px);
-}
-
-.feature-icon {
-  font-size: 16px;
-}
-
-.banner-actions {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.cta-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border: none;
-  padding: 16px 32px;
-  border-radius: 50px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-}
-
-.cta-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
-}
-
-.cta-secondary {
-  background: transparent;
-  color: #667eea;
-  border: 2px solid #667eea;
-  padding: 14px 32px;
-  border-radius: 50px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.cta-secondary:hover {
-  background: #667eea;
-  color: white;
-  transform: translateY(-3px);
-}
-
-.arrow-icon {
-  width: 18px;
-  height: 18px;
-  transition: transform 0.3s ease;
-}
-
-.cta-primary:hover .arrow-icon {
-  transform: translateX(4px);
-}
-
-.banner-image {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.image-container {
-  position: relative;
-  width: 400px;
-  height: 400px;
-  border-radius: 50%;
-  overflow: hidden;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
-  transform: rotate(-5deg);
-  transition: transform 0.3s ease;
-}
-
-.image-container:hover {
-  transform: rotate(0deg) scale(1.05);
-}
-
-.hero-image {
+.hero-video {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  opacity: 1;
+  filter: saturate(1.05) contrast(1.05);
+  z-index: 0;
 }
 
-.image-overlay {
+.hero-video-fallback {
+  z-index: -1;
+  background:
+    radial-gradient(circle at 70% 20%, rgba(234, 215, 199, 0.28), transparent 28rem),
+    linear-gradient(135deg, #211d18, #8b4a2f);
+}
+
+.hero-shade {
+  z-index: 1;
+  pointer-events: none;
+  
+  background:
+    radial-gradient(circle at 76% 18%, rgba(217, 255, 143, 0.04), transparent 25rem),
+    radial-gradient(circle at 20% 80%, rgba(139, 74, 47, 0.12), transparent 32rem),
+    linear-gradient(90deg, rgba(33, 29, 24, 0.42), rgba(33, 29, 24, 0.06));
+}
+
+.hero-orbs {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
 }
 
-.price-badge {
+.orb {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  padding: 12px 16px;
-  border-radius: 15px;
-  text-align: center;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  width: 34rem;
+  height: 34rem;
+  border-radius: 999px;
+  filter: blur(38px);
+  opacity: 0.34;
+  mix-blend-mode: screen;
+  animation: orbFloat 13s ease-in-out infinite alternate;
 }
 
-.badge-text {
-  display: block;
-  font-size: 12px;
-  color: #6b7280;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+.orb-one {
+  top: -12rem;
+  right: 6%;
+  background: rgba(255, 250, 242, 0.24);
 }
 
-.badge-price {
-  display: block;
-  font-size: 20px;
-  font-weight: 700;
-  background: linear-gradient(135deg, #ff6b6b, #ff8e53);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.orb-two {
+  left: -12rem;
+  bottom: -16rem;
+  background: rgba(139, 74, 47, 0.72);
+  animation-delay: -4s;
 }
 
-.stats-section {
+.orb-three {
+  right: -12rem;
+  top: 38%;
+  background: rgba(66, 106, 79, 0.34);
+  animation-delay: -8s;
+}
+
+.motion-hero-inner {
+  position: relative;
+  z-index: 3;
+  width: min(1831px, calc(100% - 40px));
+  min-height: calc(100vh - 82px);
+  margin: 0 auto;
+  padding: clamp(72px, 9vw, 128px) clamp(0px, 2vw, 42px);
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
-  padding: 40px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 0.72fr);
+  gap: clamp(42px, 6vw, 92px);
+  align-items: center;
 }
 
-.stat-item {
-  text-align: center;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  transition: transform 0.3s ease;
+.hero-copy {
+  max-width: 860px;
+  padding: clamp(24px, 4vw, 54px);
+  border-radius: 32px;
+  animation: panelRise 900ms ease both;
 }
 
-.stat-item:hover {
-  transform: translateY(-5px);
-}
-
-.stat-number {
-  font-size: 32px;
-  font-weight: 800;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 8px;
-}
-
-.stat-label {
-  font-size: 14px;
-  color: #6b7280;
-  font-weight: 600;
+.motion-kicker {
+  margin: 0 0 24px;
+  color: rgba(255, 250, 242, 0.72);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.72rem;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.16em;
 }
 
-@keyframes float {
+.hero-title-wrap {
+  position: relative;
+}
 
-  0%,
-  100% {
-    transform: translateY(0px) rotate(0deg);
+.hero-title-wrap h1 {
+  margin: 0;
+  max-width: 900px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(4.4rem, 11vw, 10.5rem);
+  font-weight: 500;
+  line-height: 0.82;
+  letter-spacing: -0.085em;
+}
+
+.motion-script {
+  color: #d9ff8f;
+  font-family: 'Condiment', cursive;
+  font-weight: 400;
+  line-height: 1;
+  mix-blend-mode: exclusion;
+}
+
+.hero-script {
+  position: static;
+  display: inline-block;
+  margin-top: 14px;
+  margin-left: clamp(40px, 18vw, 260px);
+  font-size: clamp(2rem, 3.4vw, 4rem);
+  transform: rotate(-4deg);
+  animation: scriptDrift 4.8s ease-in-out infinite alternate;
+}
+
+.hero-subtitle {
+  max-width: 560px;
+  margin: 28px 0 0;
+  color: rgba(255, 250, 242, 0.72);
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  line-height: 1.7;
+}
+
+.hero-actions {
+  margin-top: 34px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.motion-btn {
+  min-height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 20px;
+  border: 1px solid rgba(255, 250, 242, 0.28);
+  border-radius: 999px;
+  color: #fffaf2;
+  background: transparent;
+  font: inherit;
+  font-weight: 750;
+  cursor: pointer;
+  transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+
+.motion-btn.primary {
+  background: #fffaf2;
+  color: #211d18;
+  border-color: #fffaf2;
+}
+
+.motion-btn.secondary {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.motion-btn:hover {
+  transform: translateY(-2px);
+  border-color: #fffaf2;
+}
+
+.hero-showcase {
+  position: relative;
+  min-height: 640px;
+  animation: panelRise 1000ms ease both 120ms;
+}
+
+.hero-product-card {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: min(100%, 520px);
+  padding: 14px;
+  border-radius: 32px;
+}
+
+.hero-product-card img {
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  object-fit: cover;
+}
+
+.hero-card-overlay {
+  position: absolute;
+  left: 28px;
+  right: 28px;
+  bottom: 28px;
+  padding: 18px 20px;
+  border-radius: 22px;
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: end;
+}
+
+.hero-card-overlay span,
+.hero-note span {
+  color: rgba(255, 250, 242, 0.68);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.67rem;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+}
+
+.hero-card-overlay strong {
+  color: #fffaf2;
+  text-align: right;
+}
+
+.hero-note {
+  position: absolute;
+  z-index: 5;
+  display: grid;
+  gap: 6px;
+  min-width: 180px;
+  padding: 16px 18px;
+  border-radius: 20px;
+}
+
+.hero-note strong {
+  color: #fffaf2;
+  font-size: 0.96rem;
+}
+
+.note-one {
+  top: 13%;
+  left: -22px;
+  animation: cardFloatA 4.8s ease-in-out infinite alternate;
+}
+
+.note-two {
+  right: -20px;
+  bottom: 17%;
+  animation: cardFloatB 5.4s ease-in-out infinite alternate;
+}
+
+@keyframes orbFloat {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
   }
 
-  50% {
-    transform: translateY(-20px) rotate(180deg);
+  to {
+    transform: translate3d(42px, -32px, 0) scale(1.08);
   }
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .banner {
-    padding: 60px 0 40px;
+@keyframes panelRise {
+  from {
+    opacity: 0;
+    transform: translateY(32px) scale(0.98);
   }
 
-  .banner-content {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes scriptDrift {
+  from {
+    transform: rotate(-4deg) translateY(0);
+  }
+
+  to {
+    transform: rotate(-2deg) translateY(-12px);
+  }
+}
+
+@keyframes cardFloatA {
+  from {
+    transform: translateY(0) rotate(-2deg);
+  }
+
+  to {
+    transform: translateY(-18px) rotate(1deg);
+  }
+}
+
+@keyframes cardFloatB {
+  from {
+    transform: translateY(0) rotate(2deg);
+  }
+
+  to {
+    transform: translateY(18px) rotate(-1deg);
+  }
+}
+
+@media (max-width: 1050px) {
+  .motion-hero-inner {
     grid-template-columns: 1fr;
-    gap: 40px;
-    text-align: center;
   }
 
-  .banner-text {
-    padding-right: 0;
+  .hero-showcase {
+    min-height: 520px;
   }
 
-  .stats-section {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+  .hero-product-card {
+    position: relative;
+    width: 100%;
+    height: 520px;
   }
 
-  .image-container {
-    width: 300px;
-    height: 300px;
-  }
-
-  .banner-features {
-    justify-content: center;
+  .hero-note {
+    display: none;
   }
 }
 
-@media (max-width: 480px) {
-  .banner-actions {
-    flex-direction: column;
-    width: 100%;
+@media (max-width: 560px) {
+  .motion-hero {
+    min-height: auto;
   }
 
-  .cta-primary,
-  .cta-secondary {
-    width: 100%;
-    justify-content: center;
+  .motion-hero-inner {
+    width: min(100% - 28px, 1831px);
+    min-height: auto;
+    padding: 58px 0;
   }
 
-  .stats-section {
-    grid-template-columns: 1fr;
+  .hero-copy {
+    padding: 22px;
+    border-radius: 24px;
   }
 
-  .floating-mochi {
-    font-size: 30px;
+  .hero-title-wrap h1 {
+    font-size: 4.3rem;
+  }
+
+  .hero-script {
+  margin-left: 0;
+  margin-top: 12px;
+  font-size: 2.4rem;
+}
+
+  .hero-product-card {
+    height: 430px;
   }
 }
 </style>

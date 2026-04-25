@@ -181,7 +181,7 @@ const fetchProducts = async () => {
 
     // console.log('Calling fetchProducts with search:', route.query.search)
     try {
-        let url = 'https://mochi-mevn.onrender.com/api/products'
+        let url = 'http://localhost:5000/api/products'
 
         // Nếu có search param → thêm vào URL
         if (route.query.search) {

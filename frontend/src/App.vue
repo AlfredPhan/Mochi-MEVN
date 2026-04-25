@@ -117,33 +117,63 @@ onMounted(() => {
 
 <style scoped>
 .scroll-top-btn {
-  position: fixed;
-  bottom: 100px;
-  right: 32px;
-  width: 56px;
-  height: 56px;
-  background: rgba(255, 255, 255, 0.95);
-  color: #667eea;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.08);
-  backdrop-filter: blur(12px);
-  z-index: 1000;
-  transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
-  outline: none;
-  user-select: none;
+  position: fixed !important;
+  bottom: 100px !important;
+  right: 32px !important;
+  width: 56px !important;
+  height: 56px !important;
+  display: grid !important;
+  place-items: center !important;
+  border: 1px solid rgba(217, 255, 143, 0.55) !important;
+  border-radius: 50% !important;
+  background: #d9ff8f !important;
+  color: #211d18 !important;
+  cursor: pointer !important;
+  box-shadow:
+    0 18px 48px rgba(33, 29, 24, 0.22),
+    0 0 30px rgba(217, 255, 143, 0.24) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  z-index: 1000 !important;
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease !important;
+  outline: none !important;
+  user-select: none !important;
 }
-.scroll-top-btn:hover { background: #667eea; color: white; transform: scale(1.1) translateY(-2px); }
-.scroll-top-btn:focus { outline: none; }
-.scroll-top-btn.scrolling { animation: scrollPulse 0.8s ease-in-out; }
+
+.scroll-top-btn:hover {
+  transform: translateY(-3px) scale(1.03) !important;
+  background: #fffaf2 !important;
+  color: #211d18 !important;
+  border-color: rgba(255, 250, 242, 0.75) !important;
+  box-shadow:
+    0 22px 56px rgba(33, 29, 24, 0.28),
+    0 0 34px rgba(255, 250, 242, 0.22) !important;
+}
+
+.scroll-top-btn svg,
+.scroll-top-btn svg path {
+  color: #211d18 !important;
+  stroke: #211d18 !important;
+}
+
+.scroll-top-btn.scrolling {
+  animation: scrollPulse 0.8s ease-in-out;
+}
 @keyframes scrollPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.15); } }
 .scroll-btn-enter-active, .scroll-btn-leave-active { transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
 .scroll-btn-enter-from, .scroll-btn-leave-to { opacity: 0; transform: scale(0.8) translateY(20px); }
-@media (max-width: 768px) { .scroll-top-btn { bottom: 90px; right: 24px; width: 48px; height: 48px; } }
+@media (max-width: 768px) {
+  .scroll-top-btn {
+    bottom: 90px !important;
+    right: 24px !important;
+    width: 48px !important;
+    height: 48px !important;
+  }
+}
 .toast-container {
   position: fixed; bottom: 24px; right: 24px; z-index: 9999;
   display: flex; flex-direction: column; align-items: flex-end; gap: 12px; pointer-events: none;

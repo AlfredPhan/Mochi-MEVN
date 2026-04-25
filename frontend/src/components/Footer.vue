@@ -1,325 +1,405 @@
 <template>
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <!-- Logo & Tagline -->
+  <footer class="site-footer">
+    <div class="footer-glow" aria-hidden="true"></div>
+
+    <div class="footer-inner">
+      <div class="footer-top">
         <div class="footer-brand">
-          <h2 class="logo">
-            <!-- <span class="logo-icon">🍡</span> -->
-            <span class="logo-text">Mochi Store</span>
-          </h2>
-          <p class="tagline">Handcrafted Japanese delights, fresh every day.</p>
+          <router-link to="/" class="footer-logo">
+            <span class="brand-mark">M</span>
+            <span>
+              <strong>Mochi Store</strong>
+              <small>Premium Japanese Treats</small>
+            </span>
+          </router-link>
+
+          <p class="footer-description">
+            Handcrafted mochi, soft cream fillings and seasonal Japanese-inspired
+            desserts prepared fresh every day.
+          </p>
         </div>
 
-        <!-- Navigation -->
-        <div class="footer-nav">
-          <h3>Quick Links</h3>
-          <ul>
-            <li><router-link to="/" class="nav-link" active-class="active">Home</router-link></li>
-            <li><router-link to="/about" class="nav-link" active-class="active">About</router-link></li>
-            <li><router-link to="/contact" class="nav-link" active-class="active">Contact</router-link></li>
-          </ul>
-        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <p class="footer-label">Explore</p>
 
-        <!-- Contact Info -->
+          <router-link to="/">Home</router-link>
+          <router-link to="/about">About</router-link>
+          <router-link to="/contact">Contact</router-link>
+          <router-link to="/products">Products</router-link>
+        </nav>
+
         <div class="footer-contact">
-          <h3>Contact</h3>
-          <p>Email: support@mochistore.com</p>
-          <p>Phone: +84 039 8621 402</p>
+          <p class="footer-label">Visit & Contact</p>
 
-          <!-- Enhanced địa chỉ có thể click -->
-          <div class="address-container">
-            <p class="address" @click="toggleMap" title="Click to show/hide map" role="button" tabindex="0">
-              <span class="address-icon">📍</span>
-              <span class="address-text">20 Cong Hoa Tan Binh District, Ho Chi Minh City, Vietnam</span>
-              <span class="map-toggle-icon" :class="{ 'rotated': showMap }">▼</span>
-            </p>
+          <a href="mailto:support@mochistore.com" class="contact-row">
+            <span>Email</span>
+            <strong>support@mochistore.com</strong>
+          </a>
+
+          <a href="tel:+840398621402" class="contact-row">
+            <span>Phone</span>
+            <strong>+84 039 8621 402</strong>
+          </a>
+
+          <button
+            class="address-card"
+            type="button"
+            @click="toggleMap"
+            :aria-expanded="showMap"
+          >
+            <span class="address-index">01</span>
+            <span class="address-copy">
+              20 Cong Hoa, Tan Binh District,
+              <br />
+              Ho Chi Minh City, Vietnam
+            </span>
+            <span class="address-arrow" :class="{ rotated: showMap }">⌄</span>
+          </button>
+        </div>
+      </div>
+
+      <Transition name="map-reveal">
+        <div v-if="showMap" class="footer-map">
+          <div class="map-heading">
+            <span>Store location</span>
+            <button type="button" @click="toggleMap">Close</button>
           </div>
 
-          <!-- Enhanced Google Map với animation -->
-          <Transition name="map-slide">
-            <div v-if="showMap" class="map-container">
-              <div class="map-header">
-                <span class="map-title">📍 Our Location</span>
-                <button @click="toggleMap" class="close-map-btn" title="Close map">×</button>
-              </div>
-              <div class="map-wrapper">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.8665806971223!2d106.65369837587697!3d10.822158089332622!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175292922bb0d8b%3A0xd0b8f9f7a4df5776!2zMjAgQ8O0bmcgSG9hLCBUw6JuIELDrG5oLCBI4buTIENow60gQ2l0eSwgVmnhu4d0IE5hbQ!5e0!3m2!1sen!2s!4v1717413292425!5m2!1sen!2s"
-                  width="100%" height="250" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy"
-                  decoding="async" referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
-              </div>
-              <div class="map-footer">
-                <small>Click and drag to explore • Zoom with mouse wheel</small>
-              </div>
-            </div>
-          </Transition>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.8665806971223!2d106.65369837587697!3d10.822158089332622!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175292922bb0d8b%3A0xd0b8f9f7a4df5776!2zMjAgQ8O0bmcgSG9hLCBUw6JuIELDrG5oLCBI4buTIENow60gQ2l0eSwgVmnhu4d0IE5hbQ!5e0!3m2!1sen!2s!4v1717413292425!5m2!1sen!2s"
+            width="100%"
+            height="320"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            decoding="async"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
         </div>
-
-      </div>
+      </Transition>
 
       <div class="footer-bottom">
         <p>© 2025 Mochi Store. All rights reserved.</p>
+        <p class="footer-note">Fresh daily · Small batch · Soft texture</p>
       </div>
     </div>
   </footer>
 </template>
 
-<style scoped>
-.footer {
-  background: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%);
-  padding: 60px 0 30px;
-  color: #374151;
-  font-size: 14px;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.footer-content {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 40px;
-  margin-bottom: 40px;
-}
-
-.footer-brand .logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 24px;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-
-.logo-icon {
-  font-size: 28px;
-}
-
-.logo-text {
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.tagline {
-  color: #6b7280;
-  font-size: 14px;
-  max-width: 250px;
-}
-
-.footer-nav h3,
-.footer-contact h3 {
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 12px;
-  color: #111827;
-}
-
-.footer-nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.footer-nav li {
-  margin-bottom: 8px;
-}
-
-.footer-nav a {
-  text-decoration: none;
-  color: #374151;
-  transition: color 0.3s ease;
-}
-
-.footer-nav a:hover {
-  color: #667eea;
-}
-
-.footer-contact p {
-  margin: 6px 0;
-  color: #4b5563;
-}
-
-/* Enhanced Address Styling */
-.address-container {
-  margin: 8px 0;
-}
-
-.address {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 16px;
-  background: rgba(103, 126, 234, 0.05);
-  border: 2px solid transparent;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  margin: 0;
-  user-select: none;
-}
-
-.address:hover {
-  background: rgba(103, 126, 234, 0.1);
-  border-color: rgba(103, 126, 234, 0.3);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(103, 126, 234, 0.15);
-}
-
-.address-icon {
-  font-size: 16px;
-  flex-shrink: 0;
-}
-
-.address-text {
-  flex: 1;
-  color: #4b5563;
-  font-size: 14px;
-  line-height: 1.4;
-}
-
-.map-toggle-icon {
-  font-size: 12px;
-  color: #667eea;
-  transition: transform 0.3s ease;
-  flex-shrink: 0;
-}
-
-.map-toggle-icon.rotated {
-  transform: rotate(180deg);
-}
-
-/* Enhanced Map Container */
-.map-container {
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  border: 1px solid rgba(103, 126, 234, 0.2);
-}
-
-.map-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 20px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: white;
-}
-
-.map-title {
-  font-weight: 600;
-  font-size: 15px;
-}
-
-.close-map-btn {
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  color: white;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 18px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-}
-
-.close-map-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: scale(1.1);
-}
-
-.map-wrapper {
-  position: relative;
-  overflow: hidden;
-}
-
-.map-wrapper::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #667eea, #764ba2);
-  z-index: 1;
-}
-
-.map-footer {
-  padding: 12px 20px;
-  background: #f8f9fa;
-  text-align: center;
-  color: #6b7280;
-  font-size: 12px;
-}
-
-/* Map Animation */
-.map-slide-enter-active,
-.map-slide-leave-active {
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.map-slide-enter-from {
-  opacity: 0;
-  transform: translateY(-20px) scale(0.95);
-}
-
-.map-slide-leave-to {
-  opacity: 0;
-  transform: translateY(-10px) scale(0.98);
-}
-
-.footer-bottom {
-  border-top: 1px solid #e5e7eb;
-  padding-top: 20px;
-  text-align: center;
-  color: #6b7280;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .address {
-    padding: 10px 12px;
-    font-size: 13px;
-  }
-
-  .map-header {
-    padding: 12px 16px;
-  }
-
-  .map-title {
-    font-size: 14px;
-  }
-
-  .map-footer {
-    padding: 10px 16px;
-  }
-}
-</style>
-
 <script setup>
-import { ref } from 'vue'
+import { ref, nextTick } from 'vue'
 
 const showMap = ref(false)
 
-const toggleMap = () => {
+const toggleMap = async () => {
   showMap.value = !showMap.value
+
   if (!showMap.value) return
 
-  setTimeout(() => {
-    const el = document.querySelector('.map-container')
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' })
-  }, 300) // delay để map render xong mới scroll
+  await nextTick()
+
+  const map = document.querySelector('.footer-map')
+  map?.scrollIntoView({
+    behavior: 'smooth',
+    block: 'center'
+  })
+}
+</script>
+
+<style scoped>
+.site-footer {
+  position: relative;
+  overflow: hidden;
+  padding: 86px 0 32px;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(217, 255, 143, 0.08), transparent 24rem),
+    radial-gradient(circle at 88% 20%, rgba(139, 74, 47, 0.22), transparent 28rem),
+    #1d1712;
+  color: #fffaf2;
+  border-top: 1px solid rgba(255, 250, 242, 0.12);
 }
 
-</script>
+.footer-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  background-image:
+    linear-gradient(rgba(255, 250, 242, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 250, 242, 0.08) 1px, transparent 1px);
+  background-size: 76px 76px;
+  mask-image: linear-gradient(to bottom, black, transparent 72%);
+}
+
+.footer-inner {
+  position: relative;
+  z-index: 1;
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(180px, 0.45fr) minmax(320px, 0.8fr);
+  gap: clamp(38px, 7vw, 110px);
+  align-items: start;
+}
+
+.footer-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.brand-mark {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 250, 242, 0.28);
+  border-radius: 50%;
+  color: #d9ff8f;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+}
+
+.footer-logo strong {
+  display: block;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.65rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+.footer-logo small {
+  display: block;
+  margin-top: 6px;
+  color: rgba(255, 250, 242, 0.52);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.footer-description {
+  max-width: 440px;
+  margin: 28px 0 0;
+  color: rgba(255, 250, 242, 0.66);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.footer-label {
+  margin: 0 0 18px;
+  color: #d9ff8f;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.footer-nav {
+  display: grid;
+  gap: 12px;
+}
+
+.footer-nav a {
+  width: fit-content;
+  color: rgba(255, 250, 242, 0.68);
+  text-decoration: none;
+  font-size: 0.98rem;
+  font-weight: 650;
+  transition: color 160ms ease, transform 160ms ease;
+}
+
+.footer-nav a:hover {
+  color: #fffaf2;
+  transform: translateX(4px);
+}
+
+.footer-contact {
+  display: grid;
+  gap: 12px;
+}
+
+.contact-row {
+  display: grid;
+  gap: 4px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.contact-row span {
+  color: rgba(255, 250, 242, 0.42);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.contact-row strong {
+  color: rgba(255, 250, 242, 0.78);
+  font-size: 0.98rem;
+  font-weight: 600;
+}
+
+.address-card {
+  width: 100%;
+  margin-top: 8px;
+  padding: 16px 18px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 16px;
+  align-items: center;
+  border: 1px solid rgba(255, 250, 242, 0.14);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.055);
+  color: #fffaf2;
+  text-align: left;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
+}
+
+.address-card:hover {
+  border-color: rgba(255, 250, 242, 0.28);
+  background: rgba(255, 255, 255, 0.085);
+  transform: translateY(-2px);
+}
+
+.address-index {
+  color: #d9ff8f;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.68rem;
+}
+
+.address-copy {
+  color: rgba(255, 250, 242, 0.68);
+  line-height: 1.5;
+}
+
+.address-arrow {
+  color: #d9ff8f;
+  transition: transform 180ms ease;
+}
+
+.address-arrow.rotated {
+  transform: rotate(180deg);
+}
+
+.footer-map {
+  margin-top: 42px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 250, 242, 0.16);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.055);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.22);
+}
+
+.map-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 18px;
+  border-bottom: 1px solid rgba(255, 250, 242, 0.12);
+}
+
+.map-heading span {
+  color: #fffaf2;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.map-heading button {
+  border: 1px solid rgba(255, 250, 242, 0.18);
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(255, 250, 242, 0.76);
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.footer-map iframe {
+  display: block;
+  filter: grayscale(0.15) contrast(0.95);
+}
+
+.footer-bottom {
+  margin-top: 64px;
+  padding-top: 22px;
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  border-top: 1px solid rgba(255, 250, 242, 0.12);
+  color: rgba(255, 250, 242, 0.5);
+  font-size: 0.9rem;
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
+.footer-note {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.map-reveal-enter-active,
+.map-reveal-leave-active {
+  transition: opacity 240ms ease, transform 240ms ease;
+}
+
+.map-reveal-enter-from,
+.map-reveal-leave-to {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+@media (max-width: 900px) {
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-brand,
+  .footer-contact {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 560px) {
+  .site-footer {
+    padding: 64px 0 28px;
+  }
+
+  .footer-inner {
+    width: min(100% - 28px, 1180px);
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+  }
+
+  .address-card {
+    grid-template-columns: 1fr auto;
+  }
+
+  .address-index {
+    display: none;
+  }
+}
+</style>

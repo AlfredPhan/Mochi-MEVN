@@ -627,32 +627,48 @@ onUnmounted(() => {
 }
 
 .auth-link {
-    display: inline-flex;
-    align-items: center;
-    text-decoration: none;
-    font-size: 15px;
-    font-weight: 500;
-    padding: 10px 20px;
-    border-radius: 25px;
-    transition: all 0.3s ease;
-    color: #6b7280;
-    border: 1px solid rgba(102, 126, 234, 0.3);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 22px;
+  border: 1px solid rgba(33, 29, 24, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 252, 246, 0.58);
+  color: #756c60;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: none;
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
 }
 
 .auth-link:hover {
-    transform: translateY(-1px);
-    background: rgba(102, 126, 234, 0.1);
-    color: #667eea;
-    border-color: rgba(102, 126, 234, 0.5);
+  /* background: #211d18; */
+  color: #fffaf2;
+  border-color: #211d18;
+  transform: translateY(-1px);
 }
 
-.auth-link.active-auth {
+.auth-link.active-auth,
+.auth-link.router-link-active,
+.auth-link.router-link-exact-active {
+  background: rgba(139, 74, 47, 0.12);
+  color: #211d18;
+  border-color: rgba(139, 74, 47, 0.34);
+  box-shadow: none;
+}
+
+/* .auth-link.active-auth {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     font-weight: 600;
     box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
     border-color: transparent;
-}
+} */
 
 .auth-link.active-auth:hover {
     box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
@@ -1535,5 +1551,350 @@ onUnmounted(() => {
         width: 18px;
         height: 18px;
     }
+}
+
+/* === Boutique nav sync: Home / About / Contact giống Login / Register === */
+
+.nav-section {
+  justify-content: center;
+}
+
+.nav {
+  gap: 14px;
+  align-items: center;
+}
+
+.nav-link {
+  min-height: 44px !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px !important;
+  border: 1px solid rgba(33, 29, 24, 0.18) !important;
+  border-radius: 999px !important;
+  background: transparent !important;
+  color: #756c60 !important;
+  font-size: 0.96rem !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.nav-link:hover {
+  background: rgba(139, 74, 47, 0.08) !important;
+  color: #211d18 !important;
+  border-color: rgba(139, 74, 47, 0.26) !important;
+  transform: translateY(-1px) !important;
+}
+
+.nav-link.active,
+.nav-link.router-link-active,
+.nav-link.router-link-exact-active {
+  background: rgba(139, 74, 47, 0.12) !important;
+  color: #211d18 !important;
+  border-color: rgba(139, 74, 47, 0.34) !important;
+  font-weight: 800 !important;
+  box-shadow: none !important;
+}
+
+/* Đồng bộ luôn Login/Register để không còn màu tím khi hover */
+.auth-link:hover {
+  background: rgba(139, 74, 47, 0.08) !important;
+  color: #211d18 !important;
+  border-color: rgba(139, 74, 47, 0.26) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: none !important;
+}
+
+.auth-link.active-auth,
+.auth-link.router-link-active,
+.auth-link.router-link-exact-active {
+  background: rgba(139, 74, 47, 0.12) !important;
+  color: #211d18 !important;
+  border-color: rgba(139, 74, 47, 0.34) !important;
+  box-shadow: none !important;
+}
+
+.auth-link.active-auth:hover,
+.auth-link.router-link-active:hover,
+.auth-link.router-link-exact-active:hover {
+  background: rgba(139, 74, 47, 0.16) !important;
+  color: #211d18 !important;
+  border-color: rgba(139, 74, 47, 0.38) !important;
+  box-shadow: none !important;
+}
+
+/* === Boutique Search Overlay Sync === */
+
+.search-overlay {
+  background: rgba(33, 29, 24, 0.62) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  padding: 20px !important;
+}
+
+.search-container {
+  width: min(980px, calc(100vw - 40px)) !important;
+  min-width: 0 !important;
+  display: grid !important;
+  grid-template-columns: 220px minmax(280px, 1fr) minmax(260px, 0.8fr) !important;
+  align-items: center !important;
+  gap: 22px !important;
+  padding: 28px !important;
+  border: 1px solid rgba(255, 250, 242, 0.16) !important;
+  border-radius: 28px !important;
+  background:
+    radial-gradient(circle at top left, rgba(217, 255, 143, 0.08), transparent 18rem),
+    rgba(255, 250, 242, 0.92) !important;
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.38),
+    0 34px 100px rgba(0, 0, 0, 0.34) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+}
+
+.search-header {
+  margin: 0 !important;
+  padding: 0 !important;
+  border-bottom: none !important;
+}
+
+.search-title {
+  margin: 0 !important;
+  color: #211d18 !important;
+  background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-size: 2.6rem !important;
+  font-weight: 600 !important;
+  line-height: 0.92 !important;
+  letter-spacing: -0.055em !important;
+}
+
+.search-title::after {
+  content: 'Find your favorite flavor';
+  display: block;
+  margin-top: 10px;
+  color: #8b4a2f;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.66rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+}
+
+.search-input-container {
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+.search-input-icon {
+  width: 22px !important;
+  height: 22px !important;
+  margin: 0 !important;
+  color: #211d18 !important;
+}
+
+.search-input {
+  height: 52px !important;
+  min-width: 0 !important;
+  padding: 0 18px !important;
+  border: 1px solid rgba(33, 29, 24, 0.18) !important;
+  border-radius: 999px !important;
+  background: rgba(255, 252, 246, 0.82) !important;
+  color: #211d18 !important;
+  font-size: 0.98rem !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.search-input::placeholder {
+  color: rgba(33, 29, 24, 0.42) !important;
+}
+
+.search-input:focus {
+  border-color: rgba(139, 74, 47, 0.42) !important;
+  background: #fffaf2 !important;
+  box-shadow: 0 0 0 4px rgba(139, 74, 47, 0.08) !important;
+}
+
+.search-submit {
+  height: 52px !important;
+  min-width: 120px !important;
+  padding: 0 20px !important;
+  border: 1px solid #211d18 !important;
+  border-radius: 999px !important;
+  background: #211d18 !important;
+  color: #fffaf2 !important;
+  font-size: 0.92rem !important;
+  font-weight: 800 !important;
+  box-shadow: none !important;
+  transition:
+    transform 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease,
+    opacity 160ms ease !important;
+}
+
+.search-submit:hover:not(:disabled) {
+  transform: translateY(-2px) !important;
+  background: #8b4a2f !important;
+  border-color: #8b4a2f !important;
+}
+
+.search-submit:disabled {
+  opacity: 0.48 !important;
+  cursor: not-allowed !important;
+}
+
+.search-submit-icon {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+.search-suggestions {
+  margin: 0 !important;
+  display: grid !important;
+  gap: 12px !important;
+}
+
+.suggestion-label {
+  color: #756c60 !important;
+  font-family: 'JetBrains Mono', ui-monospace, monospace !important;
+  font-size: 0.66rem !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.13em !important;
+}
+
+.suggestion-tags {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+}
+
+.suggestion-tag {
+  margin: 0 !important;
+  padding: 10px 14px !important;
+  border: 1px solid rgba(33, 29, 24, 0.12) !important;
+  border-radius: 999px !important;
+  background: rgba(33, 29, 24, 0.055) !important;
+  color: #211d18 !important;
+  font-size: 0.92rem !important;
+  font-weight: 700 !important;
+  transition:
+    transform 160ms ease,
+    background 160ms ease,
+    border-color 160ms ease !important;
+}
+
+.suggestion-tag:hover {
+  transform: translateY(-2px) !important;
+  background: rgba(139, 74, 47, 0.12) !important;
+  border-color: rgba(139, 74, 47, 0.28) !important;
+}
+
+/* Header search button cũng bỏ tím */
+.search-btn {
+  border: 1px solid rgba(33, 29, 24, 0.18) !important;
+  border-radius: 999px !important;
+  background: rgba(255, 252, 246, 0.58) !important;
+  color: #211d18 !important;
+  box-shadow: none !important;
+}
+
+.search-btn:hover {
+  background: rgba(139, 74, 47, 0.08) !important;
+  color: #211d18 !important;
+  border-color: rgba(139, 74, 47, 0.26) !important;
+  box-shadow: none !important;
+}
+
+.search-btn.search-active {
+  background: rgba(139, 74, 47, 0.12) !important;
+  color: #211d18 !important;
+  border-color: rgba(139, 74, 47, 0.34) !important;
+  box-shadow: none !important;
+}
+
+.search-ripple {
+  display: none !important;
+}
+
+/* Cart button đồng bộ luôn */
+.cart-btn {
+  border: 1px solid rgba(33, 29, 24, 0.18) !important;
+  border-radius: 999px !important;
+  background: rgba(255, 252, 246, 0.58) !important;
+  color: #211d18 !important;
+  box-shadow: none !important;
+}
+
+.cart-btn:hover {
+  background: rgba(139, 74, 47, 0.08) !important;
+  color: #211d18 !important;
+  border-color: rgba(139, 74, 47, 0.26) !important;
+  box-shadow: none !important;
+}
+
+.cart-count {
+  background: #211d18 !important;
+  color: #fffaf2 !important;
+}
+
+/* Mobile */
+@media (max-width: 860px) {
+  .search-container {
+    grid-template-columns: 1fr !important;
+    align-items: stretch !important;
+    padding: 24px !important;
+  }
+
+  .search-title {
+    font-size: 2.25rem !important;
+  }
+
+  .search-input-container {
+    grid-template-columns: auto 1fr !important;
+  }
+
+  .search-submit {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-overlay {
+    align-items: flex-start !important;
+    padding-top: 84px !important;
+  }
+
+  .search-container {
+    width: 100% !important;
+    padding: 20px !important;
+    border-radius: 24px !important;
+  }
+
+  .search-input-container {
+    gap: 10px !important;
+  }
+
+  .suggestion-tags {
+    gap: 7px !important;
+  }
+
+  .suggestion-tag {
+    font-size: 0.86rem !important;
+    padding: 9px 12px !important;
+  }
 }
 </style>

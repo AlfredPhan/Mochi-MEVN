@@ -1,66 +1,182 @@
 <template>
-  <section class="payment-result cancel">
-    <div class="result-container">
-      <img src="https://cdn-icons-png.flaticon.com/512/463/463612.png" alt="Cancel" class="result-icon" />
-      <h1>Payment Not Completed</h1>
-      <p>You can try again or choose a different payment method.</p>
-      <router-link to="/checkout" class="return-button">Back to Checkout</router-link>
+  <section class="result-page cancel">
+    <div class="result-texture" aria-hidden="true"></div>
+
+    <div class="result-card">
+      <div class="result-icon cancel-icon">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path
+            d="M18 6L6 18M6 6l12 12"
+            stroke="currentColor"
+            stroke-width="2.4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+
+      <p class="result-kicker">Payment interrupted</p>
+
+      <h1>
+        Payment not
+        <br />
+        completed.
+      </h1>
+
+      <p class="result-description">
+        Your payment was not completed. You can return to checkout and try again
+        or choose another payment method.
+      </p>
+
+      <div class="result-actions">
+        <router-link to="/checkout" class="primary-link danger">
+          Back to Checkout
+          <span>→</span>
+        </router-link>
+
+        <router-link to="/" class="secondary-link">
+          Back to Home
+        </router-link>
+      </div>
     </div>
   </section>
 </template>
 
-  
-  <style scoped>
-  .payment-result {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 70vh;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  .result-container {
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    max-width: 500px;
-  }
-  
-  .result-icon {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 20px;
-  }
-  
-  h1 {
-    font-size: 2rem;
-    color: #ef4444;
-    margin-bottom: 10px;
-  }
-  
-  p {
-    color: #374151;
-    font-size: 1.1rem;
-    margin-bottom: 20px;
-  }
-  
-  .return-button {
-    display: inline-block;
-    padding: 12px 24px;
-    background: linear-gradient(135deg, #ef4444, #dc2626);
-    color: white;
-    font-weight: 600;
-    border-radius: 12px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-  }
-  
-  .return-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
-  }
-  </style>
-  
+<style scoped>
+.result-page {
+  position: relative;
+  min-height: calc(100vh - 82px);
+  display: grid;
+  place-items: center;
+  padding: 72px 20px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(255, 138, 120, 0.08), transparent 26rem),
+    radial-gradient(circle at 84% 22%, rgba(139, 74, 47, 0.28), transparent 30rem),
+    linear-gradient(135deg, #211d18 0%, #3b2419 100%);
+  color: #fffaf2;
+}
+
+.result-texture {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.12;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255, 250, 242, 0.34) 0 1px, transparent 1px),
+    radial-gradient(circle at 80% 70%, rgba(255, 250, 242, 0.22) 0 1px, transparent 1px);
+  background-size: 18px 18px, 26px 26px;
+}
+
+.result-card {
+  position: relative;
+  z-index: 1;
+  width: min(720px, 100%);
+  padding: clamp(28px, 5vw, 56px);
+  border: 1px solid rgba(255, 250, 242, 0.14);
+  border-radius: 34px;
+  background: rgba(255, 255, 255, 0.055);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  text-align: center;
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.14),
+    0 34px 100px rgba(0, 0, 0, 0.28);
+}
+
+.result-icon {
+  width: 74px;
+  height: 74px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 26px;
+  border: 1px solid rgba(255, 138, 120, 0.36);
+  border-radius: 50%;
+  background: rgba(159, 45, 32, 0.22);
+  color: #ffd9d4;
+}
+
+.result-icon svg {
+  width: 34px;
+  height: 34px;
+}
+
+.result-kicker {
+  margin: 0 0 18px;
+  color: #ffd9d4;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+h1 {
+  margin: 0;
+  color: #fffaf2;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(4rem, 8vw, 7.4rem);
+  font-weight: 500;
+  line-height: 0.86;
+  letter-spacing: -0.085em;
+}
+
+.result-description {
+  max-width: 520px;
+  margin: 28px auto 0;
+  color: rgba(255, 250, 242, 0.7);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.result-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 34px;
+}
+
+.primary-link,
+.secondary-link {
+  min-height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 22px;
+  border-radius: 999px;
+  font-weight: 850;
+  text-decoration: none;
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+
+.primary-link {
+  border: 1px solid #fffaf2;
+  background: #fffaf2;
+  color: #211d18;
+}
+
+.primary-link.danger {
+  border-color: rgba(255, 138, 120, 0.34);
+  background: rgba(159, 45, 32, 0.26);
+  color: #ffd9d4;
+}
+
+.primary-link:hover {
+  transform: translateY(-2px);
+  background: rgba(159, 45, 32, 0.34);
+  border-color: rgba(255, 138, 120, 0.5);
+}
+
+.secondary-link {
+  border: 1px solid rgba(255, 250, 242, 0.22);
+  background: transparent;
+  color: #fffaf2;
+}
+
+.secondary-link:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 250, 242, 0.08);
+}
+</style>

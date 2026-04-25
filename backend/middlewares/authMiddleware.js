@@ -37,7 +37,7 @@ module.exports = async (req, res, next) => {
 
     next();
   } catch (err) {
-    console.error("❌ JWT Error:", err.message);
+    console.error("JWT Error:", err.message);
     return res.status(401).json({ message: "Unauthorized: Invalid token" });
   }
 };

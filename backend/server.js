@@ -83,7 +83,7 @@ app.use('/api/cart', cartRoute);
 
 app.use((err, req, res, next) => {
   if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
-    console.error('❌ Lỗi JSON:', err.message);
+    console.error('Lỗi JSON:', err.message);
     return res.status(400).json({ message: 'Invalid JSON body' });
   }
   next();
@@ -103,8 +103,8 @@ mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
-  .then(() => console.log('✅ MongoDB connected successfully!'))
-  .catch(err => console.error('❌ MongoDB connection error:', err));
+  .then(() => console.log('MongoDB connected successfully!'))
+  .catch(err => console.error('MongoDB connection error:', err));
 
 app.get('/api/ping', (req, res) => {
   res.send('pong');
@@ -112,6 +112,6 @@ app.get('/api/ping', (req, res) => {
 
 
 app.listen(port, '0.0.0.0', () => {
-  console.log(`🚀 Server is running on http://0.0.0.0:${port}`);
+  console.log(`Server is running on http://0.0.0.0:${port}`);
 });
 

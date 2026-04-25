@@ -1,48 +1,77 @@
 <template>
-  <section class="page about">
-    <div class="container">
-      <div class="about-content">
-        <!-- Text giới thiệu -->
-        <div class="about-text">
-          <h1 class="page-title">About Us</h1>
-          <p class="page-description">
-            Welcome to Mochi Store! We are passionate about bringing the authentic taste of Japan to your doorstep. 
-            Our mochi is handcrafted daily using traditional techniques and premium ingredients.
-          </p>
-          <div class="about-details">
-            <p>🍵 Fresh ingredients</p>
-            <p>🧑‍🍳 Handmade daily</p>
-            <p>🇯🇵 Authentic Japanese recipes</p>
+  <section class="about-motion-page">
+    <video autoplay muted loop playsinline class="about-bg-video">
+      <source src="/videos/mochi-soft-motion.mp4" type="video/mp4" />
+    </video>
+
+    <div class="about-bg-fallback"></div>
+    <div class="about-shade"></div>
+    <div class="about-texture" aria-hidden="true"></div>
+
+    <div class="about-container">
+      <div class="about-copy">
+        <p class="about-kicker">About Mochi Store</p>
+
+        <h1>
+          Soft texture.
+          <br />
+          Quiet craft.
+          <br />
+          Fresh every day.
+        </h1>
+
+        <span class="about-script">made with care</span>
+
+        <p class="about-description">
+          Mochi Store brings together Japanese-inspired recipes, delicate cream
+          fillings and seasonal flavors. Every piece is prepared in small
+          batches so the texture stays soft, fresh and balanced.
+        </p>
+
+        <div class="about-principles">
+          <div class="principle-card liquid-glass">
+            <span>01</span>
+            <strong>Fresh ingredients</strong>
+            <p>Selected daily for clean flavor and soft texture.</p>
+          </div>
+
+          <div class="principle-card liquid-glass">
+            <span>02</span>
+            <strong>Handmade batches</strong>
+            <p>Prepared with care instead of mass production.</p>
+          </div>
+
+          <div class="principle-card liquid-glass">
+            <span>03</span>
+            <strong>Japanese-inspired</strong>
+            <p>Simple, gentle desserts designed to feel refined.</p>
           </div>
         </div>
+      </div>
 
-        <!-- 3D Store Viewer -->
-        <div class="about-3d">
-          <div class="viewer-header">
-            <div class="viewer-badge">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                <polyline points="9 22 9 12 15 12 15 22"></polyline>
-              </svg>
-              <span>3D Virtual Store</span>
-            </div>
-            <div class="viewer-controls">
-              <button class="control-btn" title="Reset View">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="23 4 23 10 17 10"></polyline>
-                  <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
-                </svg>
-              </button>
-            </div>
+      <div class="store-viewer liquid-glass">
+        <div class="viewer-header">
+          <div>
+            <span class="viewer-index">Virtual store</span>
+            <strong>Explore the space</strong>
           </div>
-          
-          <div class="loading-overlay" id="loadingOverlay">
+
+          <button class="control-btn" type="button" title="Reset View" @click="resetView">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <polyline points="23 4 23 10 17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="viewer-body">
+          <div v-if="loading" class="loading-overlay">
             <div class="loading-spinner"></div>
-            <p class="loading-text">Loading 3D Model...</p>
+            <p>Loading 3D model</p>
           </div>
 
           <model-viewer
-            id="storeModel"
+            ref="viewerRef"
             src="/models/sketchfab_store_in_mall.glb"
             alt="3D Mochi Store"
             camera-controls
@@ -55,37 +84,18 @@
             min-field-of-view="15deg"
             max-field-of-view="45deg"
             ar
-            style="width:100%; height:100%;"
+            class="model-viewer"
           >
-            <!-- AR Button -->
             <button slot="ar-button" class="ar-button">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
-                <line x1="7" y1="2" x2="7" y2="22"></line>
-                <line x1="17" y1="2" x2="17" y2="22"></line>
-                <line x1="2" y1="12" x2="22" y2="12"></line>
-                <line x1="2" y1="7" x2="7" y2="7"></line>
-                <line x1="2" y1="17" x2="7" y2="17"></line>
-                <line x1="17" y1="17" x2="22" y2="17"></line>
-                <line x1="17" y1="7" x2="22" y2="7"></line>
-              </svg>
-              <span>View in AR</span>
+              View in AR
+              <span>→</span>
             </button>
           </model-viewer>
-          
-          <div class="viewer-footer">
-            <div class="hint">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"></path>
-                <path d="M12 6v6l4 2"></path>
-              </svg>
-              <span>Drag to rotate • Scroll to zoom</span>
-            </div>
-            <div class="view-counter">
-              <div class="pulse-dot"></div>
-              <span>Interactive 3D</span>
-            </div>
-          </div>
+        </div>
+
+        <div class="viewer-footer">
+          <span>Drag to rotate · Scroll to zoom</span>
+          <span class="live-dot">Interactive</span>
         </div>
       </div>
     </div>
@@ -93,332 +103,446 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
+import { onMounted, ref } from 'vue'
+
+const viewerRef = ref(null)
+const loading = ref(true)
+
+const resetView = () => {
+  const viewer = viewerRef.value
+  if (!viewer) return
+
+  viewer.cameraOrbit = '0deg 75deg auto'
+  viewer.fieldOfView = '35deg'
+}
 
 onMounted(() => {
-  const viewer = document.querySelector("#storeModel");
-  const resetBtn = document.querySelector(".control-btn");
-  const loadingOverlay = document.querySelector("#loadingOverlay");
+  const viewer = viewerRef.value
+  if (!viewer) return
 
-  viewer.addEventListener("load", () => {
-    // Ẩn loading overlay
-    if (loadingOverlay) {
-      loadingOverlay.style.opacity = "0";
-      setTimeout(() => {
-        loadingOverlay.style.display = "none";
-      }, 300);
-    }
+  viewer.addEventListener('load', () => {
+    loading.value = false
 
-    // Cinematic intro animation
-    let angle = 0;
-    let fov = 35;
+    let angle = 0
+    let fov = 35
 
     const rotateOnce = setInterval(() => {
-      angle += 2;
-      viewer.cameraOrbit = `${angle}deg 75deg auto`;
+      angle += 2
+      viewer.cameraOrbit = `${angle}deg 75deg auto`
 
       if (angle >= 360) {
-        clearInterval(rotateOnce);
+        clearInterval(rotateOnce)
 
-        // Smooth zoom in
         const zoomIn = setInterval(() => {
-          fov -= 0.7;
-          viewer.fieldOfView = `${fov}deg`;
-          if (fov <= 18) {
-            clearInterval(zoomIn);
-            viewer.cameraOrbit = "0deg 75deg auto";
-            viewer.fieldOfView = "18deg";
-          }
-        }, 40);
-      }
-    }, 25);
-  });
+          fov -= 0.7
+          viewer.fieldOfView = `${fov}deg`
 
-  // Reset camera position
-  if (resetBtn) {
-    resetBtn.addEventListener("click", () => {
-      viewer.cameraOrbit = "0deg 75deg auto";
-      viewer.fieldOfView = "35deg";
-    });
-  }
-});
+          if (fov <= 22) {
+            clearInterval(zoomIn)
+            viewer.cameraOrbit = '0deg 75deg auto'
+            viewer.fieldOfView = '22deg'
+          }
+        }, 40)
+      }
+    }, 25)
+  })
+
+  viewer.addEventListener('error', () => {
+    loading.value = false
+  })
+})
 </script>
 
 <style scoped>
-.page {
-  padding: 80px 20px;
-  background: linear-gradient(135deg, #f8fafc, #edf2f7);
-  min-height: 70vh;
-  color: #374151;
+.about-motion-page {
+  position: relative;
+  min-height: calc(100vh - 82px);
+  overflow: hidden;
+  padding: clamp(72px, 8vw, 120px) 0;
+  background: #211d18;
+  color: #fffaf2;
 }
 
-.container {
-  max-width: 1200px;
+.about-bg-video,
+.about-bg-fallback,
+.about-shade {
+  position: absolute;
+  inset: 0;
+}
+
+.about-bg-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.34;
+  filter: saturate(0.85) contrast(1.08);
+  z-index: 0;
+}
+
+.about-bg-fallback {
+  z-index: -1;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(139, 74, 47, 0.42), transparent 30rem),
+    linear-gradient(135deg, #211d18, #4a2d20);
+}
+
+.about-shade {
+  z-index: 1;
+  background:
+    radial-gradient(circle at 82% 12%, rgba(217, 255, 143, 0.08), transparent 26rem),
+    linear-gradient(90deg, rgba(33, 29, 24, 0.9), rgba(33, 29, 24, 0.48));
+}
+
+.about-texture {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.12;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255, 250, 242, 0.35) 0 1px, transparent 1px),
+    radial-gradient(circle at 80% 70%, rgba(255, 250, 242, 0.22) 0 1px, transparent 1px);
+  background-size: 18px 18px, 26px 26px;
+}
+
+.about-container {
+  position: relative;
+  z-index: 3;
+  width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(380px, 0.72fr);
+  gap: clamp(42px, 8vw, 120px);
+  align-items: center;
 }
 
-.about-content {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
+.about-kicker {
+  margin: 0 0 20px;
+  color: rgba(255, 250, 242, 0.68);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
 }
 
-.about-text {
-  flex: 1;
+.about-copy h1 {
+  margin: 0;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(4.2rem, 8.2vw, 8.7rem);
+  font-weight: 500;
+  line-height: 0.84;
+  letter-spacing: -0.085em;
 }
 
-.page-title {
-  font-size: 36px;
-  font-weight: 700;
-  margin-bottom: 20px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.about-script {
+  display: inline-block;
+  margin-top: 12px;
+  margin-left: clamp(28px, 15vw, 220px);
+  color: #d9ff8f;
+  font-family: 'Condiment', cursive;
+  font-size: clamp(2.4rem, 4.6vw, 5.2rem);
+  line-height: 1;
+  transform: rotate(-4deg);
+  mix-blend-mode: exclusion;
+  animation: scriptDrift 4.8s ease-in-out infinite alternate;
 }
 
-.page-description {
-  font-size: 18px;
-  line-height: 1.6;
-  max-width: 700px;
-  margin-bottom: 30px;
+.about-description {
+  max-width: 570px;
+  margin: 30px 0 0;
+  color: rgba(255, 250, 242, 0.72);
+  font-size: 1.04rem;
+  line-height: 1.75;
 }
 
-.about-details p {
-  font-size: 16px;
-  margin: 6px 0;
+.about-principles {
+  margin-top: 42px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
 }
 
-.about-3d {
-  flex: 1;
-  max-width: 650px;
-  height: 500px;
-  border-radius: 24px;
-  background: linear-gradient(145deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-  box-shadow: 
-    0 25px 60px -12px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(255, 255, 255, 0.05),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+.liquid-glass {
   position: relative;
   overflow: hidden;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  display: flex;
-  flex-direction: column;
+  background: rgba(255, 255, 255, 0.055);
+  background-blend-mode: luminosity;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.18),
+    0 24px 70px rgba(0, 0, 0, 0.16);
 }
 
-.about-3d::before {
+.liquid-glass::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(circle at 20% 30%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(118, 75, 162, 0.15) 0%, transparent 50%);
-  animation: gradientShift 8s ease-in-out infinite;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.2px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.48) 0%,
+    rgba(255, 255, 255, 0.14) 22%,
+    rgba(255, 255, 255, 0.02) 48%,
+    rgba(255, 255, 255, 0.16) 78%,
+    rgba(255, 255, 255, 0.42) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
   pointer-events: none;
 }
 
-@keyframes gradientShift {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(1.1); }
+.principle-card {
+  min-height: 148px;
+  padding: 16px;
+  display: grid;
+  align-content: end;
+  gap: 7px;
+  border-radius: 22px;
+  transition: transform 180ms ease, background 180ms ease;
 }
 
-.about-3d:hover {
-  transform: translateY(-6px);
-  box-shadow: 
-    0 35px 80px -15px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(255, 255, 255, 0.1),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+.principle-card:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.085);
 }
 
-/* Header Controls */
-.viewer-header {
+.principle-card span {
+  color: #d9ff8f;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.68rem;
+}
+
+.principle-card strong {
+  color: #fffaf2;
+  font-size: 1rem;
+}
+
+.principle-card p {
+  margin: 0;
+  color: rgba(255, 250, 242, 0.58);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.store-viewer {
+  min-height: 620px;
+  border-radius: 32px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 20px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  z-index: 10;
+  flex-direction: column;
+}
+
+.viewer-header,
+.viewer-footer {
   position: relative;
-}
-
-.viewer-badge {
+  z-index: 3;
   display: flex;
   align-items: center;
-  gap: 8px;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
-  color: #fff;
-  font-size: 14px;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(255, 250, 242, 0.12);
+}
+
+.viewer-footer {
+  border-top: 1px solid rgba(255, 250, 242, 0.12);
+  border-bottom: 0;
+}
+
+.viewer-header div {
+  display: grid;
+  gap: 4px;
+}
+
+.viewer-index {
+  color: #d9ff8f;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.viewer-header strong {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.7rem;
   font-weight: 600;
-  padding: 8px 16px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.viewer-badge svg {
-  color: #a78bfa;
-}
-
-.viewer-controls {
-  display: flex;
-  gap: 8px;
+  line-height: 1;
+  letter-spacing: -0.04em;
 }
 
 .control-btn {
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 250, 242, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 250, 242, 0.06);
+  color: #fffaf2;
   cursor: pointer;
-  color: #fff;
-  transition: all 0.3s ease;
+  transition: transform 160ms ease, background 160ms ease;
 }
 
 .control-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: scale(1.05);
+  transform: translateY(-2px);
+  background: rgba(255, 250, 242, 0.11);
 }
 
-/* Model Viewer */
-model-viewer {
-  flex: 1;
+.viewer-body {
   position: relative;
+  flex: 1;
+  min-height: 500px;
 }
 
-/* Loading Overlay */
+.model-viewer {
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+}
+
 .loading-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  inset: 0;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  align-content: center;
   gap: 16px;
-  background: rgba(26, 26, 46, 0.95);
-  backdrop-filter: blur(10px);
-  z-index: 20;
-  transition: opacity 0.3s ease;
+  background: rgba(33, 29, 24, 0.82);
+  backdrop-filter: blur(14px);
+}
+
+.loading-overlay p {
+  margin: 0;
+  color: rgba(255, 250, 242, 0.68);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
 }
 
 .loading-spinner {
-  width: 50px;
-  height: 50px;
-  border: 4px solid rgba(255, 255, 255, 0.1);
-  border-top: 4px solid #667eea;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 250, 242, 0.16);
+  border-top-color: #d9ff8f;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-.loading-text {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 14px;
-  font-weight: 500;
-}
-
-/* Footer Info */
 .viewer-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 20px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  z-index: 10;
+  color: rgba(255, 250, 242, 0.58);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.live-dot {
   position: relative;
-}
-
-.hint {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.8);
-  font-weight: 500;
+  color: #d9ff8f;
 }
 
-.hint svg {
-  color: #a78bfa;
-}
-
-.view-counter {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.7);
-  font-weight: 500;
-}
-
-.pulse-dot {
-  width: 8px;
-  height: 8px;
-  background: #48bb78;
+.live-dot::before {
+  content: '';
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  animation: pulse 2s ease-in-out infinite;
-  box-shadow: 0 0 8px rgba(72, 187, 120, 0.6);
+  background: #d9ff8f;
+  box-shadow: 0 0 16px rgba(217, 255, 143, 0.65);
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.6; transform: scale(1.2); }
-}
-
-/* AR Button */
 .ar-button {
   position: absolute;
-  bottom: 20px;
   left: 50%;
+  bottom: 22px;
   transform: translateX(-50%);
-  display: flex;
+  min-height: 42px;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 24px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #fff;
-  background: linear-gradient(135deg, #48bb78, #38a169);
-  border: none;
-  border-radius: 12px;
+  gap: 10px;
+  padding: 0 16px;
+  border: 1px solid rgba(255, 250, 242, 0.22);
+  border-radius: 999px;
+  background: #fffaf2;
+  color: #211d18;
+  font: inherit;
+  font-weight: 800;
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(72, 187, 120, 0.4);
-  transition: all 0.3s ease;
-  z-index: 5;
+  z-index: 4;
 }
 
-.ar-button:hover {
-  transform: translateX(-50%) translateY(-2px);
-  box-shadow: 0 12px 28px rgba(72, 187, 120, 0.5);
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.ar-button svg {
-  animation: rotate 3s linear infinite;
+@keyframes scriptDrift {
+  from {
+    transform: rotate(-4deg) translateY(0);
+  }
+
+  to {
+    transform: rotate(-2deg) translateY(-10px);
+  }
 }
 
-@keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+@media (max-width: 1020px) {
+  .about-container {
+    grid-template-columns: 1fr;
+  }
+
+  .store-viewer {
+    min-height: 560px;
+  }
+
+  .about-principles {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
-@media (min-width: 768px) {
-  .about-content {
-    flex-direction: row;
-    align-items: center;
+@media (max-width: 680px) {
+  .about-motion-page {
+    padding: 54px 0;
+  }
+
+  .about-container {
+    width: min(100% - 28px, 1180px);
+  }
+
+  .about-copy h1 {
+    font-size: 4.1rem;
+  }
+
+  .about-script {
+    margin-left: 0;
+    font-size: 2.7rem;
+  }
+
+  .about-principles {
+    grid-template-columns: 1fr;
+  }
+
+  .store-viewer {
+    min-height: 520px;
+  }
+
+  .viewer-body,
+  .model-viewer {
+    min-height: 420px;
+  }
+
+  .viewer-footer {
+    display: grid;
   }
 }
 </style>

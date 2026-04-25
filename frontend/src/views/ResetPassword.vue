@@ -29,7 +29,7 @@ const handleResetPassword = async () => {
     // console.log("Token từ URL:", route.params.token)
 
     const res = await fetch(
-  `https://mochi-mevn.onrender.com/api/auth/reset-password/${route.params.token}`,
+  `http://10.25.34.225:5000/api/auth/reset-password/${route.params.token}`,
   {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

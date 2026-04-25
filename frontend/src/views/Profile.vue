@@ -256,7 +256,7 @@ const updateProfile = async () => {
 
       if (emailChanged) {
         tasks.push(
-          fetch('https://mochi-mevn.onrender.com/api/users/email/change/request', {
+          fetch('http://localhost:5000/api/users/email/change/request', {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
@@ -267,7 +267,7 @@ const updateProfile = async () => {
 
       if (phoneChanged) {
         tasks.push(
-          fetch('https://mochi-mevn.onrender.com/api/users/phone/change/request', {
+          fetch('http://localhost:5000/api/users/phone/change/request', {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
@@ -323,7 +323,7 @@ async function saveOtherFields() {
     const fileInput = document.getElementById('avatar-input')
     if (fileInput?.files?.[0]) formData.append('avatar', fileInput.files[0])
 
-    const res = await fetch('https://mochi-mevn.onrender.com/api/users/profile', {
+    const res = await fetch('http://localhost:5000/api/users/profile', {
       method: 'PUT',
       credentials: 'include',
       body: formData
@@ -353,7 +353,7 @@ async function verifyPhoneOtp() {
 
   try {
     otpVerifying.value = true
-    const res = await fetch('https://mochi-mevn.onrender.com/api/users/phone/change/verify', {
+    const res = await fetch('http://localhost:5000/api/users/phone/change/verify', {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
@@ -387,7 +387,7 @@ async function resendOtp() {
   if (otpSeconds.value > 0 || !pendingPhone.value) return
   try {
     otpSending.value = true
-    const res = await fetch('https://mochi-mevn.onrender.com/api/users/phone/change/request', {
+    const res = await fetch('http://localhost:5000/api/users/phone/change/request', {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
@@ -409,7 +409,7 @@ async function resendEmailOtp() {
   if (otpSeconds.value > 0 || !pendingEmail.value) return
   try {
     otpSending.value = true
-    const res = await fetch('https://mochi-mevn.onrender.com/api/users/email/change/request', {
+    const res = await fetch('http://localhost:5000/api/users/email/change/request', {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
@@ -435,7 +435,7 @@ async function verifyEmailOtp() {
   }
   try {
     otpVerifying.value = true
-    const res = await fetch('https://mochi-mevn.onrender.com/api/users/email/change/verify', {
+    const res = await fetch('http://localhost:5000/api/users/email/change/verify', {
       method: 'POST',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
@@ -468,202 +468,183 @@ async function verifyEmailOtp() {
 }
 
 .profile-wrapper {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #e0f7fa 0%, #80deea 100%);
-  padding: 80px 20px 40px;
   position: relative;
+  min-height: calc(100vh - 82px);
+  padding: clamp(64px, 7vw, 108px) 20px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(217, 255, 143, 0.08), transparent 26rem),
+    radial-gradient(circle at 84% 26%, rgba(139, 74, 47, 0.28), transparent 30rem),
+    linear-gradient(135deg, #211d18 0%, #3b2419 100%);
+  color: #fffaf2;
 }
 
 .profile-wrapper::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(240, 147, 251, 0.3) 0%, transparent 50%);
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.12;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255, 250, 242, 0.34) 0 1px, transparent 1px),
+    radial-gradient(circle at 80% 70%, rgba(255, 250, 242, 0.22) 0 1px, transparent 1px);
+  background-size: 18px 18px, 26px 26px;
+}
+
+.profile-wrapper::after {
+  content: 'Profile';
+  position: absolute;
+  left: 6vw;
+  top: 48px;
+  color: rgba(255, 250, 242, 0.045);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(8rem, 20vw, 22rem);
+  line-height: 0.8;
+  letter-spacing: -0.09em;
   pointer-events: none;
 }
 
 .profile-container {
-  max-width: 680px;
-  margin: 0 auto;
-  background: white;
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: 
-    0 20px 60px rgba(102, 126, 234, 0.25),
-    0 8px 24px rgba(0, 0, 0, 0.1);
-  position: relative;
-}
-
-/* Header */
-.profile-header {
-  position: relative;
-  padding: 48px 32px;
-  text-align: center;
-  overflow: hidden;
-}
-
-.header-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  opacity: 1;
-}
-
-.header-bg::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 10px,
-    rgba(255, 255, 255, 0.03) 10px,
-    rgba(255, 255, 255, 0.03) 20px
-  );
-  animation: slide 20s linear infinite;
-}
-
-@keyframes slide {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(50px, 50px); }
-}
-
-.header-content {
   position: relative;
   z-index: 1;
+  width: min(920px, 100%);
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid rgba(255, 250, 242, 0.14);
+  border-radius: 32px;
+  background: rgba(255, 255, 255, 0.055);
+  background-blend-mode: luminosity;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.16),
+    0 34px 100px rgba(0, 0, 0, 0.28);
 }
 
-.header-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 80px;
-  height: 80px;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  border-radius: 50%;
-  color: white;
-  margin: 0 auto 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+.profile-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.2px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.48) 0%,
+    rgba(255, 255, 255, 0.14) 22%,
+    rgba(255, 255, 255, 0.02) 48%,
+    rgba(255, 255, 255, 0.16) 78%,
+    rgba(255, 255, 255, 0.42) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
 
-.profile-header h2 {
-  color: white;
-  font-size: 2rem;
-  font-weight: 700;
-  margin: 0 0 8px;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-}
-
-.subtitle {
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 0.95rem;
-  margin: 0;
-}
-
-/* Avatar Section */
+/* Avatar */
 .avatar-section {
-  padding: 48px 32px 32px;
+  position: relative;
+  padding: 44px 34px 34px;
   text-align: center;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid rgba(255, 250, 242, 0.12);
+}
+
+.avatar-section::before {
+  content: 'Account details';
+  display: block;
+  margin-bottom: 24px;
+  color: #d9ff8f;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
 }
 
 .avatar-container {
   position: relative;
-  width: 140px;
-  height: 140px;
-  margin: 0 auto 16px;
+  width: 136px;
+  height: 136px;
+  margin: 0 auto 18px;
 }
 
 .avatar-ring {
   position: absolute;
-  top: -8px;
-  left: -8px;
-  right: -8px;
-  bottom: -8px;
+  inset: -8px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  opacity: 0.15;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: 0.15; }
-  50% { transform: scale(1.05); opacity: 0.25; }
+  border: 1px solid rgba(217, 255, 143, 0.38);
+  background:
+    radial-gradient(circle, rgba(217, 255, 143, 0.14), transparent 58%);
+  animation: profilePulse 2.8s ease-in-out infinite;
 }
 
 .profile-avatar {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid white;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   position: relative;
   z-index: 1;
-  transition: transform 0.3s ease;
-}
-
-.avatar-container:hover .profile-avatar {
-  transform: scale(1.05);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 3px solid rgba(255, 250, 242, 0.78);
+  border-radius: 50%;
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.28);
 }
 
 .avatar-edit {
   position: absolute;
+  right: 4px;
   bottom: 8px;
-  right: 8px;
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-  transition: all 0.3s ease;
   z-index: 2;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 250, 242, 0.22);
+  border-radius: 50%;
+  background: #fffaf2;
+  color: #211d18;
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.24);
+  transition: transform 160ms ease, background 160ms ease;
 }
 
 .avatar-edit:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.5);
+  transform: translateY(-2px) scale(1.04);
+  background: #d9ff8f;
 }
 
 .avatar-label {
-  font-size: 1.25rem;
+  margin: 0;
+  color: #fffaf2;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
   font-weight: 600;
-  color: #333;
-  margin: 0 0 4px;
+  line-height: 1;
+  letter-spacing: -0.055em;
 }
 
 .avatar-hint {
-  font-size: 0.85rem;
-  color: #999;
+  display: block;
+  margin-top: 10px;
+  color: rgba(255, 250, 242, 0.5);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
 }
 
-/* Form Content */
+/* Form */
 .form-content {
-  padding: 32px;
+  position: relative;
+  padding: 34px;
 }
 
 .form-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-  margin-bottom: 32px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 26px;
 }
 
 .form-field-full {
@@ -674,92 +655,83 @@ async function verifyEmailOtp() {
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-bottom: 9px;
+  color: rgba(255, 250, 242, 0.62);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.66rem;
   font-weight: 600;
-  color: #444;
-  margin-bottom: 10px;
-  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
 }
 
 .form-field label svg {
-  color: #764ba2;
+  width: 15px;
+  height: 15px;
+  color: #d9ff8f;
 }
 
 .form-field input,
 .form-field textarea {
   width: 100%;
-  padding: 14px 16px;
-  border: 2px solid #e8e8e8;
-  border-radius: 12px;
-  font-size: 0.95rem;
-  transition: all 0.3s ease;
-  font-family: inherit;
-  color: #333;
-  background: #fafafa;
+  border: 1px solid rgba(255, 250, 242, 0.18);
+  border-radius: 18px;
+  background: rgba(255, 250, 242, 0.08);
+  color: #fffaf2;
+  padding: 15px 16px;
+  font: inherit;
+  outline: none;
+  resize: vertical;
+  transition: border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: rgba(255, 250, 242, 0.34);
 }
 
 .form-field input:focus,
 .form-field textarea:focus {
-  outline: none;
-  border-color: #667eea;
-  background: white;
-  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+  border-color: rgba(217, 255, 143, 0.58);
+  background: rgba(255, 250, 242, 0.11);
+  box-shadow: 0 0 0 4px rgba(217, 255, 143, 0.08);
 }
 
 .form-field textarea {
-  resize: vertical;
-  min-height: 90px;
-  line-height: 1.6;
+  min-height: 96px;
+  line-height: 1.65;
 }
 
-/* Save Button */
 .save-btn {
   width: 100%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border: none;
-  padding: 16px 32px;
-  border-radius: 12px;
+  min-height: 54px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #fffaf2;
+  border-radius: 999px;
+  background: #fffaf2;
+  color: #211d18;
+  padding: 0 24px;
+  font: inherit;
+  font-weight: 800;
   cursor: pointer;
-  font-weight: 600;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
-  position: relative;
-  overflow: hidden;
-}
-
-.save-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: left 0.5s ease;
-}
-
-.save-btn:hover:not(:disabled)::before {
-  left: 100%;
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease, opacity 160ms ease;
 }
 
 .save-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(102, 126, 234, 0.4);
-}
-
-.save-btn:active:not(:disabled) {
-  transform: translateY(0);
+  background: #d9ff8f;
+  border-color: #d9ff8f;
 }
 
 .save-btn:disabled {
-  opacity: 0.7;
+  opacity: 0.58;
   cursor: not-allowed;
 }
 
 .btn-content,
 .btn-loading {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
@@ -768,72 +740,189 @@ async function verifyEmailOtp() {
 .spinner {
   width: 18px;
   height: 18px;
-  border: 3px solid rgba(255, 255, 255, 0.3);
-  border-top-color: white;
+  border: 2px solid rgba(33, 29, 24, 0.18);
+  border-top-color: #211d18;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
 
+/* OTP modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(33, 29, 24, 0.58);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.modal {
+  width: min(440px, 100%);
+  padding: 28px;
+  border: 1px solid rgba(255, 250, 242, 0.14);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at top left, rgba(217, 255, 143, 0.08), transparent 18rem),
+    rgba(33, 29, 24, 0.92);
+  color: #fffaf2;
+  box-shadow: 0 34px 100px rgba(0, 0, 0, 0.36);
+}
+
+.modal h3 {
+  margin: 0 0 10px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 2.2rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.modal p {
+  margin: 0;
+  color: rgba(255, 250, 242, 0.68);
+  line-height: 1.6;
+}
+
+.modal strong {
+  color: #fffaf2;
+}
+
+.otp-input {
+  width: 100%;
+  margin: 18px 0 18px;
+  padding: 15px 16px;
+  border: 1px solid rgba(255, 250, 242, 0.18);
+  border-radius: 18px;
+  background: rgba(255, 250, 242, 0.08);
+  color: #fffaf2;
+  font: inherit;
+  font-size: 1.2rem;
+  letter-spacing: 0.28em;
+  text-align: center;
+  outline: none;
+}
+
+.otp-input:focus {
+  border-color: rgba(217, 255, 143, 0.58);
+  box-shadow: 0 0 0 4px rgba(217, 255, 143, 0.08);
+}
+
+.modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.btn,
+.btn-outline,
+.btn-ghost {
+  min-height: 42px;
+  border-radius: 999px;
+  padding: 0 15px;
+  font: inherit;
+  font-weight: 750;
+  cursor: pointer;
+  transition: transform 160ms ease, background 160ms ease, opacity 160ms ease;
+}
+
+.btn {
+  border: 1px solid #fffaf2;
+  background: #fffaf2;
+  color: #211d18;
+}
+
+.btn-outline {
+  border: 1px solid rgba(255, 250, 242, 0.22);
+  background: transparent;
+  color: #fffaf2;
+}
+
+.btn-ghost {
+  border: 1px solid transparent;
+  background: transparent;
+  color: rgba(255, 250, 242, 0.62);
+}
+
+.btn:hover:not(:disabled),
+.btn-outline:hover:not(:disabled),
+.btn-ghost:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.btn:hover:not(:disabled) {
+  background: #d9ff8f;
+  border-color: #d9ff8f;
+}
+
+.btn-outline:hover:not(:disabled) {
+  background: rgba(255, 250, 242, 0.08);
+}
+
+.btn:disabled,
+.btn-outline:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Animations */
+@keyframes profilePulse {
+  0%,
+  100% {
+    opacity: 0.44;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.9;
+    transform: scale(1.04);
+  }
+}
+
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Responsive */
-@media (max-width: 768px) {
-  .form-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
+@media (max-width: 760px) {
   .profile-wrapper {
-    padding: 60px 16px 30px;
+    padding: 54px 14px;
   }
 
-  .profile-header {
-    padding: 36px 24px;
+  .profile-container {
+    border-radius: 26px;
   }
 
-  .profile-header h2 {
-    font-size: 1.6rem;
-  }
-
-  .header-icon {
-    width: 64px;
-    height: 64px;
-  }
-
-  .header-icon svg {
-    width: 36px;
-    height: 36px;
+  .avatar-section {
+    padding: 34px 20px 28px;
   }
 
   .avatar-container {
-    width: 120px;
-    height: 120px;
+    width: 118px;
+    height: 118px;
   }
 
   .form-content {
-    padding: 24px 20px;
+    padding: 24px 18px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-actions {
+    justify-content: stretch;
+  }
+
+  .btn,
+  .btn-outline,
+  .btn-ghost {
+    flex: 1;
   }
 }
-
-.modal-backdrop {
-  position: fixed; inset: 0; background: rgba(0,0,0,.4);
-  display: flex; align-items: center; justify-content: center; z-index: 9999;
-}
-.modal {
-  width: 100%; max-width: 420px; background: #fff; border-radius: 16px;
-  padding: 24px; box-shadow: 0 20px 60px rgba(0,0,0,.2);
-}
-.modal h3 { margin: 0 0 8px; }
-.otp-input {
-  width: 100%; padding: 12px 14px; font-size: 1.1rem; letter-spacing: 4px;
-  text-align: center; border: 2px solid #e8e8e8; border-radius: 12px; margin: 12px 0 16px;
-}
-.modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
-.btn { background: linear-gradient(135deg,#667eea,#764ba2); color:#fff; border:none; padding:10px 16px; border-radius:10px; cursor:pointer; }
-.btn-outline { background:#fff; border:2px solid #e8e8e8; padding:10px 16px; border-radius:10px; cursor:pointer; }
-.btn-ghost { background:transparent; border:none; padding:10px 16px; cursor:pointer; }
-.btn:disabled, .btn-outline:disabled { opacity:.6; cursor:not-allowed; }
-
 </style>
