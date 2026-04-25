@@ -20,7 +20,7 @@ export default defineConfig({
     strictPort: true,
     proxy: {
       '/api': {
-        target: 'http://https://mochi-mevn.onrender.com',
+        target: 'https://mochi-mevn.onrender.com',
         changeOrigin: true
       }
     }
